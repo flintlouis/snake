@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/09 20:08:33 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/10 00:24:41 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ typedef	struct			s_mlx
 	int					bits_per_pixel;
 	int					size_line;
 	int					endian;
+	int					players;
 	t_keyconf			*keyconf;
 	t_apple				*apple;
-	t_snake				*snake_head; /* Make it a ** for multiple players */
+	t_snake				**snake_head; /* Make it a ** for multiple players */
 }						t_mlx;
 
 int						mouse_move(int x, int y, t_mlx *mlx);
@@ -105,10 +106,15 @@ int						close_window(void *ptr);
 int						release_key(int key, t_mlx *mlx);
 int						press_key(int key, t_mlx *mlx);
 int						start_snake(t_mlx *mlx);
+void					draw_snake(t_mlx *mlx, int player);
+void					move_snake(t_mlx *mlx, int player);
+void					place_apple(t_mlx *mlx);
+void					check_apple(t_mlx *mlx, int player);
+void					background(t_mlx *mlx);
 void					init_keyconf(t_mlx *mlx);
-void					add_snake_body(t_mlx *mlx);
+void					add_snake_body(t_mlx *mlx, int player);
 void					put_pixel(int x, int y, t_mlx *mlx, t_colour colour);
-void					setup_snake(void);
+void					setup_snake(int players);
 void					put_square(t_mlx *mlx, t_point pixel, t_colour colour);
 void					init_snake(t_mlx *mlx);
 t_point					random_pixel(void);

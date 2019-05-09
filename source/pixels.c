@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:05:12 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/09 19:55:38 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/09 22:03:30 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		put_square(t_mlx *mlx, t_point pixel, t_colour colour)
 	}
 }
 
-t_point random_pixel(void)
+t_point		random_pixel(void)
 {
 	t_point pixel;
 	int nb;
@@ -61,4 +61,24 @@ t_point random_pixel(void)
 		nb++;
 	pixel.y = nb;
 	return (pixel);
+}
+
+void	background(t_mlx *mlx)
+{
+	int x;
+	int y;
+	t_colour colour;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			colour = (t_colour){0x1a, 0x3a, 0x3a};
+			put_square(mlx, (t_point){x, y}, colour);
+			x += GRID;
+		}
+		y += GRID;
+	}
 }

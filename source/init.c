@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/09 19:59:16 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/10 00:24:28 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,22 @@
 void init_snake(t_mlx *mlx)
 {
 	int i;
+	int player;
 
-	i = 0;
-	SNAKEHEAD = MEM(t_snake);
-	SNAKEHEAD->cur_pos = (t_point){ WIDTH / 2, HEIGHT / 2 };
-	SNAKEHEAD->old_pos = SNAKEHEAD->cur_pos;
-	while (i < 5)
+	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake) * mlx->players);
+	player = 0;
+	while (player < mlx->players)
 	{
-		add_snake_body(mlx);
-		i++;
+		i = 0;
+		SNAKEHEAD[player] = MEM(t_snake);
+		SNAKEHEAD[player]->cur_pos = (t_point){(player + 1) * 200, HEIGHT / 2 };
+		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
+		while (i < 5)
+		{
+			add_snake_body(mlx, player);
+			i++;
+		}
+		player++;
 	}
 }
 
@@ -49,12 +56,13 @@ static t_mlx *init_mlx(void)
 	return (mlx);
 }
 
-void setup_snake(void)
+void setup_snake(int players)
 {
 	t_mlx *mlx;
 
 	srand(time(0));
 	mlx = init_mlx();
+	mlx->players = players;
 	init_keyconf(mlx);
 	init_snake(mlx);
 	mlx->apple = MEM(t_apple);

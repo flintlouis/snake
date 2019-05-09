@@ -14,6 +14,7 @@
 
 int		main(int argc, char **argv)
 {
-	setup_snake();
+	if (argc == 2)
+		setup_snake(ft_atoi(argv[1]));
 	return (0);
 }
