@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/10 00:25:17 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/10 18:08:15 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static	void game_reset(t_mlx *mlx)
 
 int			release_key(int key, t_mlx *mlx)
 {
-	// if (key == KEY_PLUS)
-	// 	add_snake_body(mlx);
 	if (key == KEY_SPACE)
 		game_reset(mlx);
 	return (0);
@@ -60,6 +58,13 @@ int			press_key(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		close_window(NULL);
+	if (key == KEY_PLUS && KEYCONF->speed > 0)
+	{
+		KEYCONF->speed--;
+		// add_snake_body(mlx, 0);
+	}
+	if (key == KEY_MIN)
+		KEYCONF->speed++;
 	if (key == KEY_RIGHT && KEYCONF->move != KEY_LEFT)
 		KEYCONF->move = KEY_RIGHT;
 	else if (key == KEY_LEFT && KEYCONF->move != KEY_RIGHT)

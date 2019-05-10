@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:05:12 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/10 13:52:53 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/10 19:02:56 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,21 @@ t_point		random_pixel(void)
 	t_point pixel;
 	int nb;
 
-	nb = (rand() % WIDTH);
+	nb = (rand() % WIDTH - GRID);
 	while (nb % GRID != 0)
 		nb++;
-	if (nb == WIDTH)
+	if (nb == WIDTH - GRID)
 		nb -= GRID;
+	else if (nb == 0)
+		nb += GRID;
 	pixel.x = nb;
-	nb = (rand() % HEIGHT);
+	nb = (rand() % HEIGHT - GRID);
 	while (nb % GRID != 0)
 		nb++;
-	if (nb == HEIGHT)
+	if (nb == HEIGHT - GRID)
 		nb -= GRID;
+	else if (nb == 0)
+		nb += GRID;
 	pixel.y = nb;
 	return (pixel);
 }
@@ -79,7 +83,10 @@ void	background(t_mlx *mlx)
 		x = 0;
 		while (x < WIDTH)
 		{
-			colour = (t_colour){0x1a, 0x3a, 0x3a};
+			if (y == 0 || x == 0 || x == WIDTH - GRID || y == HEIGHT - GRID) /* COMMENT OUT FOR NO SIDE COLOUR */
+				colour = (t_colour){0x69, 0x69, 0x69};
+			else
+				colour = (t_colour){0x1a, 0x3a, 0x3a};
 			put_square(mlx, (t_point){x, y}, colour);
 			x += GRID;
 		}

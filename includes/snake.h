@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/10 14:14:51 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/10 18:12:42 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef	struct			s_mlx
 	int					players;
 	t_keyconf			*keyconf;
 	t_apple				*apple;
-	t_snake				**snake_head; /* Make it a ** for multiple players */
+	t_snake				**snake_head;
 }						t_mlx;
 
 int						mouse_move(int x, int y, t_mlx *mlx);
@@ -116,6 +116,8 @@ void					put_pixel(int x, int y, t_mlx *mlx, t_colour colour);
 void					setup_snake(int players);
 void					put_square(t_mlx *mlx, t_point pixel, t_colour colour);
 void					init_snake(t_mlx *mlx);
+void					ft_wait(int sec, long nsec);
+long					time_between_frames(void);
 t_point					random_pixel(void);
 
 #endif

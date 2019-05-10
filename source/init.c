@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/10 14:29:06 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/10 18:15:36 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void init_keyconf(t_mlx *mlx)
 {
 	KEYCONF = MEM(t_keyconf);
 	KEYCONF->move = KEY_RIGHT;
-	KEYCONF->speed = 50000000L;
+	KEYCONF->speed = 70;
 }
 
 static t_mlx *init_mlx(void)
