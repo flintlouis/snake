@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/10 00:28:24 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/10 14:37:09 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	add_snake_body(t_mlx *mlx, int player)
 {
 	t_snake *snake_body;
-	
+
 	snake_body = SNAKEHEAD[player];
 	while (snake_body->next)
 		snake_body = snake_body->next;
@@ -39,10 +39,19 @@ void	draw_snake(t_mlx *mlx, int player)
 	}
 }
 
+static void	ft_wait(t_mlx *mlx)
+{
+	struct timespec tim, tim2;
+	tim.tv_sec = 0;
+	tim.tv_nsec = KEYCONF->speed;
+	nanosleep(&tim, &tim2);
+}
+
 int start_snake(t_mlx *mlx)
 {
 	char *score;
 	int player;
+	
 
 	player = 0;
 	if (KEYCONF->game_over == 0)
@@ -56,6 +65,7 @@ int start_snake(t_mlx *mlx)
 			draw_snake(mlx, player);
 			player++;
 		}
+		ft_wait(mlx);
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 	score = ft_itoa(KEYCONF->score);

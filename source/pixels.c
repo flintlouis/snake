@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:05:12 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/09 22:03:30 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/10 13:52:53 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ t_point		random_pixel(void)
 	nb = (rand() % WIDTH);
 	while (nb % GRID != 0)
 		nb++;
+	if (nb == WIDTH)
+		nb -= GRID;
 	pixel.x = nb;
 	nb = (rand() % HEIGHT);
 	while (nb % GRID != 0)
 		nb++;
+	if (nb == HEIGHT)
+		nb -= GRID;
 	pixel.y = nb;
 	return (pixel);
 }

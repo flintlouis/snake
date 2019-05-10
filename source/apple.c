@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:08:34 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/10 00:26:21 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/10 14:34:36 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,13 @@ void place_apple(t_mlx *mlx)
 {
 	if (!APPLE->on)
 		APPLE->pos = random_pixel();
-	if (APPLE->pos.x == WIDTH)
-		APPLE->pos.x -= GRID;
-	if (APPLE->pos.y == HEIGHT)
-		APPLE->pos.y -= GRID;
 	put_square(mlx, APPLE->pos, (t_colour){0xB2, 0x22, 0x22});
 	APPLE->on = 1;
 }
 
 void check_apple(t_mlx *mlx, int player)
 {
+	static int speed;
 	int grow;
 
 	grow = 0;
@@ -38,8 +35,8 @@ void check_apple(t_mlx *mlx, int player)
 			add_snake_body(mlx, player);
 			grow++;
 		}
-		KEYCONF->growth = (KEYCONF->growth + 1) % 4;
-		if (KEYCONF->growth == 3 && KEYCONF->speed != 0)
-			KEYCONF->speed -= .5;
+		if (speed == 0 && KEYCONF->speed != 0)
+			KEYCONF->speed -= 10000000;
+		speed = (speed + 1) % 4;
 	}
 }

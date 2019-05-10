@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/10 00:24:41 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/10 14:14:51 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ typedef struct			s_colour
 typedef	struct			s_keyconf
 {
 	int					move;
-	double				speed;
-	int					growth;
+	long				speed;
 	int					game_over;
 	int					score;
 }						t_keyconf;
