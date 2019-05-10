@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/10 14:37:09 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/10 16:31:38 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,16 @@ static void	ft_wait(t_mlx *mlx)
 	nanosleep(&tim, &tim2);
 }
 
+/* If you sleep on the thread in which you render, you run the risk of slowing down render speed which is not what is desired
+You should calculate the time between last frame and this one, and use that as a metric for how fast the snake should move.
+If you want to determine whether or not the snake should move and you want it to move after a certain amount of time,
+you should have an incremental clock which you reset every time the snake moves.
+This doesn't block the thread and you don't run around at the speed of sound. */
+
 int start_snake(t_mlx *mlx)
 {
 	char *score;
 	int player;
-	
 
 	player = 0;
 	if (KEYCONF->game_over == 0)
