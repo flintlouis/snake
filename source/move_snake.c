@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/10 00:26:27 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/10 09:20:45 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ static void move_head(t_mlx *mlx, t_snake *snake)
 
 void	move_snake(t_mlx *mlx, int player)
 {
-	static double i;
+	// static double i;
 	t_snake *snake;
 
-	if (i == KEYCONF->speed)
-	{	
+	// if (i == KEYCONF->speed)
+	// {	
 		snake = SNAKEHEAD[player];
 		snake->old_pos = snake->cur_pos;
 		move_head(mlx, snake);
@@ -72,8 +72,8 @@ void	move_snake(t_mlx *mlx, int player)
 			}
 		}
 		check_apple(mlx, player);
-		i = 0;
-	}
-	else
-		i += .5;
+	// 	i = 0;
+	// }
+	// else
+	// 	i += .5;
 }

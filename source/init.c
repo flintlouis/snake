@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/10 00:24:28 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/10 09:19:21 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void init_snake(t_mlx *mlx)
 	{
 		i = 0;
 		SNAKEHEAD[player] = MEM(t_snake);
-		SNAKEHEAD[player]->cur_pos = (t_point){(player + 1) * 200, HEIGHT / 2 };
+		SNAKEHEAD[player]->cur_pos = random_pixel();//(t_point){(player + 1) * 200, HEIGHT / 2 };
 		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
 		while (i < 5)
 		{
