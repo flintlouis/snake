@@ -14,7 +14,7 @@
 
 int		main(int argc, char **argv)
 {
-	if (argc == 2 && ft_atoi(argv[1]) != 0)
+	if (argc == 2 && ft_atoi(argv[1]) > 0 && ft_atoi(argv[1]) <= 2)
 			setup_snake(ft_atoi(argv[1]));
 	else
 		ft_putendl("Usage : ./snake [amount of players]");

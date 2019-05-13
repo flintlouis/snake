@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/10 18:15:36 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 18:42:32 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void init_snake(t_mlx *mlx)
 	int i;
 	int player;
 
-	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake) * mlx->players);
+	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake*) * mlx->players);
 	player = 0;
 	while (player < mlx->players)
 	{
 		i = 0;
 		SNAKEHEAD[player] = MEM(t_snake);
 		SNAKEHEAD[player]->cur_pos = random_pixel();//(t_point){WIDTH / 2, HEIGHT / 2 };
+		if (SNAKEHEAD[player]->cur_pos.x >= (WIDTH - 100))
+			SNAKEHEAD[player]->cur_pos.x -= 100;
 		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
 		while (i < 5)
 		{
@@ -34,13 +36,22 @@ void init_snake(t_mlx *mlx)
 		}
 		player++;
 	}
+	SNAKEHEAD[player] = NULL;
 }
 
 void init_keyconf(t_mlx *mlx)
 {
-	KEYCONF = MEM(t_keyconf);
-	KEYCONF->move = KEY_RIGHT;
-	KEYCONF->speed = 70;
+	int player;
+
+	player = 0;
+	KEYCONF = (t_keyconf**)malloc(sizeof(t_keyconf*) * mlx->players);
+	while (player < mlx->players)
+	{
+		KEYCONF[player] = MEM(t_keyconf);
+		KEYCONF[player]->move = KEY_RIGHT;
+		KEYCONF[player]->speed = 100;
+		player++;
+	}
 }
 
 static t_mlx *init_mlx(void)

@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/10 18:08:15 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 18:03:35 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,31 @@ int			press_key(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		close_window(NULL);
-	if (key == KEY_PLUS && KEYCONF->speed > 0)
+	if (key == KEY_PLUS && KEYCONF[0]->speed > 0)
 	{
-		KEYCONF->speed--;
+		KEYCONF[0]->speed--;
 		// add_snake_body(mlx, 0);
 	}
 	if (key == KEY_MIN)
-		KEYCONF->speed++;
-	if (key == KEY_RIGHT && KEYCONF->move != KEY_LEFT)
-		KEYCONF->move = KEY_RIGHT;
-	else if (key == KEY_LEFT && KEYCONF->move != KEY_RIGHT)
-		KEYCONF->move = KEY_LEFT;
-	else if (key == KEY_UP && KEYCONF->move != KEY_DOWN)
-		KEYCONF->move = KEY_UP;
-	else if (key == KEY_DOWN && KEYCONF->move != KEY_UP)
-		KEYCONF->move = KEY_DOWN;
+		KEYCONF[0]->speed++;
+	if (key == KEY_RIGHT && KEYCONF[0]->move != KEY_LEFT)
+		KEYCONF[0]->move = KEY_RIGHT;
+	else if (key == KEY_LEFT && KEYCONF[0]->move != KEY_RIGHT)
+		KEYCONF[0]->move = KEY_LEFT;
+	else if (key == KEY_UP && KEYCONF[0]->move != KEY_DOWN)
+		KEYCONF[0]->move = KEY_UP;
+	else if (key == KEY_DOWN && KEYCONF[0]->move != KEY_UP)
+		KEYCONF[0]->move = KEY_DOWN;
+	if (mlx->players == 2)
+	{
+		if (key == KEY_D && KEYCONF[1]->move != KEY_A)
+			KEYCONF[1]->move = KEY_D;
+		else if (key == KEY_A && KEYCONF[1]->move != KEY_D)
+			KEYCONF[1]->move = KEY_A;
+		else if (key == KEY_W && KEYCONF[1]->move != KEY_S)
+			KEYCONF[1]->move = KEY_W;
+		else if (key == KEY_S && KEYCONF[1]->move != KEY_W)
+			KEYCONF[1]->move = KEY_S;
+	}
 	return (0);
 }

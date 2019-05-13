@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:08:34 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/10 18:12:54 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 18:30:57 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void check_apple(t_mlx *mlx, int player)
 	if (SNAKEHEAD[player]->cur_pos.x == APPLE->pos.x && SNAKEHEAD[player]->cur_pos.y == APPLE->pos.y)
 	{
 		APPLE->on = 0;
-		KEYCONF->score += 5;
+		KEYCONF[player]->score += 5;
 		while (grow < 3)
 		{
 			add_snake_body(mlx, player);
 			grow++;
 		}
-		if (KEYCONF->speed > 0)
-			KEYCONF->speed -= 2;
+		if (KEYCONF[player]->speed > 0)
+			KEYCONF[player]->speed -= 2;
 	}
 }

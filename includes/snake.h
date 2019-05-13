@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/10 18:12:42 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 19:10:25 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef	struct			s_keyconf
 {
 	int					move;
 	long				speed;
+	long				ms;
 	int					game_over;
 	int					score;
 }						t_keyconf;
@@ -93,8 +94,8 @@ typedef	struct			s_mlx
 	int					size_line;
 	int					endian;
 	int					players;
-	t_keyconf			*keyconf;
 	t_apple				*apple;
+	t_keyconf			**keyconf;
 	t_snake				**snake_head;
 }						t_mlx;
 

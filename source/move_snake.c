@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/10 18:43:44 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 18:58:40 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,46 @@ static int check_collision(t_snake *snake_head, t_snake *body)
 	return (0);
 }
 
+static int check_collision_player(t_mlx *mlx, int player)
+{
+	int opponent;
+	t_snake *opponent_snake;
+
+	opponent = (player + 1) % 2;
+	if (!SNAKEHEAD[opponent])
+		return (0);
+	opponent_snake = SNAKEHEAD[opponent];
+	while (opponent_snake)
+	{
+		if (SNAKEHEAD[player]->cur_pos.x == opponent_snake->cur_pos.x && SNAKEHEAD[player]->cur_pos.y == opponent_snake->cur_pos.y)
+			return (1);
+		opponent_snake = opponent_snake->next;
+	}
+	return (0);
+}
+
 static void	move_snake_body(t_snake *body, t_point new_pos)
 {
 	body->old_pos = body->cur_pos;
 	body->cur_pos = new_pos;
 }
 
-static void move_snake_head(t_mlx *mlx, t_snake *snake)
+static void move_snake_head(t_mlx *mlx, t_snake *snake, int player)
 {
-		if (KEYCONF->move == KEY_RIGHT)
-			snake->cur_pos.x += GRID;
-		else if (KEYCONF->move == KEY_LEFT)
-			snake->cur_pos.x -= GRID;
-		else if (KEYCONF->move == KEY_UP)
-			snake->cur_pos.y -= GRID;
-		else if (KEYCONF->move == KEY_DOWN)
-			snake->cur_pos.y += GRID;
+	if (KEYCONF[player]->move == KEY_RIGHT || KEYCONF[player]->move == KEY_D)
+		snake->cur_pos.x += GRID;
+	else if (KEYCONF[player]->move == KEY_LEFT || KEYCONF[player]->move == KEY_A)
+		snake->cur_pos.x -= GRID;
+	else if (KEYCONF[player]->move == KEY_UP || KEYCONF[player]->move == KEY_W)
+		snake->cur_pos.y -= GRID;
+	else if (KEYCONF[player]->move == KEY_DOWN || KEYCONF[player]->move == KEY_S)
+		snake->cur_pos.y += GRID;
 }
 
-static void game_over(t_mlx *mlx)
+static void game_over(t_mlx *mlx, int player)
 {
 	ft_putendl("OUCH!!!");
-	KEYCONF->game_over = 1;
+	KEYCONF[player]->game_over = 1;
 }
 
 void	move_snake(t_mlx *mlx, int player)
@@ -67,16 +85,24 @@ void	move_snake(t_mlx *mlx, int player)
 
 	snake = SNAKEHEAD[player];
 	snake->old_pos = snake->cur_pos;
-	move_snake_head(mlx, snake);
-	// no_sides(snake); /* CAN PASS THROUGH SIDES */ 
+	move_snake_head(mlx, snake, player);
+	no_sides(snake); /* CAN PASS THROUGH SIDES */
+	if (check_collision_player(mlx, player))
+	{
+		game_over(mlx, player);
+		return ;
+	}
 	while (snake->next)
 	{
 		move_snake_body(snake->next, snake->old_pos);
 		snake = snake->next;
 		if (check_collision(SNAKEHEAD[player], snake))
-			game_over(mlx);
+		{
+			game_over(mlx, player);
+			return ;
+		}
 	}
-	if (check_sides_collision(SNAKEHEAD[player])) /* CAN'T PASS THROUGH SIDES */
-		game_over(mlx);
+	// if (check_sides_collision(SNAKEHEAD[player])) /* CAN'T PASS THROUGH SIDES */
+		// game_over(mlx, player);
 	check_apple(mlx, player);
 }
