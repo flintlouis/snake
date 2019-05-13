@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/13 19:23:48 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 20:53:59 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void init_snake(t_mlx *mlx)
 	{
 		i = 0;
 		SNAKEHEAD[player] = MEM(t_snake);
-		SNAKEHEAD[player]->cur_pos = random_pixel();//(t_point){WIDTH / 2, HEIGHT / 2 };
-		if (SNAKEHEAD[player]->cur_pos.x >= (WIDTH - 100))
-			SNAKEHEAD[player]->cur_pos.x -= 100;
+		if (mlx->players == 1)
+			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 2, HEIGHT / 2 };
+		else
+			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 4 + (WIDTH / 2 * player), HEIGHT / 2 };
 		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
 		while (i < 5)
 		{
@@ -52,7 +53,7 @@ void init_keyconf(t_mlx *mlx)
 			KEYCONF[player]->move = KEY_RIGHT;
 		else
 			KEYCONF[player]->move = KEY_D;
-		KEYCONF[player]->speed = 70;
+		KEYCONF[player]->speed = 80;
 		player++;
 	}
 }

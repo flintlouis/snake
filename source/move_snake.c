@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/13 19:37:18 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 20:51:42 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,10 @@ static int check_collision_player(t_mlx *mlx, int player)
 	t_snake *opponent_snake;
 
 	opponent = (player + 1) % 2;
-	if (mlx->players != 2)
-		return (0);
 	opponent_snake = SNAKEHEAD[opponent];
 	while (opponent_snake)
 	{
-		if (SNAKEHEAD[player]->cur_pos.x == opponent_snake->cur_pos.x && SNAKEHEAD[player]->cur_pos.y == opponent_snake->cur_pos.y)
+		if (check_collision(SNAKEHEAD[player], opponent_snake))
 			return (1);
 		opponent_snake = opponent_snake->next;
 	}

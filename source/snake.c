@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/13 19:34:15 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 20:38:01 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	draw_snake(t_mlx *mlx, int player)
 	else
 	{
 		colour1[0] = (t_colour){0x22, 0x8B, 0x22};
-		colour1[1] = (t_colour){0x00, 0x00, 0x00};
+		colour1[1] = (t_colour){0x32, 0xCD, 0x32};
 	}
 	while (snake)
 	{
@@ -74,19 +74,19 @@ static void snake(t_mlx* mlx)
 	int player;
 
 	player = 0;
-	if (KEYCONF[0]->ms >= KEYCONF[0]->speed) /* HOW TO DO THIS WITH 2 PLAYERS */
-	{
 		background(mlx);
 		place_apple(mlx);
 		// ft_bzero(mlx->data_addr, HEIGHT * WIDTH * (mlx->bits_per_pixel / 8));
 		while (player < mlx->players)
 		{
 			draw_snake(mlx, player);
-			move_snake(mlx, player);
-			KEYCONF[player]->ms = 0;
+			if (KEYCONF[player]->ms >= KEYCONF[player]->speed) /* HOW TO DO THIS WITH 2 PLAYERS */
+			{
+				move_snake(mlx, player);
+				KEYCONF[player]->ms = 0;
+			}
 			player++;
 		}
-	}
 }
 
 int start_snake(t_mlx *mlx)
@@ -95,7 +95,7 @@ int start_snake(t_mlx *mlx)
 	long		ms;
 
 	ms = time_between_frames();
-	if (!get_player_info(mlx, ms)) /* IF NO PLAYER IS GAMEOVER */
+	if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED*/
 		snake(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 	score = ft_itoa(KEYCONF[0]->score);
