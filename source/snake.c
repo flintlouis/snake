@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/13 20:38:01 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 23:54:31 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void snake(t_mlx* mlx)
 
 	player = 0;
 		background(mlx);
-		place_apple(mlx);
 		// ft_bzero(mlx->data_addr, HEIGHT * WIDTH * (mlx->bits_per_pixel / 8));
+		place_apple(mlx);
 		while (player < mlx->players)
 		{
 			draw_snake(mlx, player);
@@ -99,12 +99,12 @@ int start_snake(t_mlx *mlx)
 		snake(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 	score = ft_itoa(KEYCONF[0]->score);
-	mlx_string_put(mlx->mlx, mlx->win, (WIDTH - 30), 20, 0xffffff, score);
+	mlx_string_put(mlx->mlx, mlx->win, 20, 20, 0xffffff, score);
 	free(score);
 	if (mlx->players == 2)
 	{
 		score = ft_itoa(KEYCONF[1]->score);
-		mlx_string_put(mlx->mlx, mlx->win, 20, 20, 0xffffff, score);
+		mlx_string_put(mlx->mlx, mlx->win, (WIDTH - 30), 20, 0xffffff, score);
 		free(score);
 	}
 	return (0);

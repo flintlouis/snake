@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/13 23:17:20 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 23:51:42 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static	void game_reset(t_mlx *mlx)
 	}
 	init_snake(mlx);
 	APPLE->on = 0;
+	system("clear");
 }
 
 int			release_key(int key, t_mlx *mlx)

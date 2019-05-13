@@ -6,11 +6,12 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/13 23:20:50 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 23:50:32 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
+#include <stdlib.h>
 
 static int check_sides_collision(t_snake *snake_head)
 {
@@ -61,6 +62,7 @@ static void	move_snake_body(t_snake *body, t_point new_pos)
 
 static void move_snake_head(t_mlx *mlx, t_snake *snake, int player)
 {
+	snake->old_pos = snake->cur_pos;
 	if (KEYCONF[player]->move == KEY_RIGHT || KEYCONF[player]->move == KEY_D)
 		snake->cur_pos.x += GRID;
 	else if (KEYCONF[player]->move == KEY_LEFT || KEYCONF[player]->move == KEY_A)
@@ -76,7 +78,8 @@ static void move_snake_head(t_mlx *mlx, t_snake *snake, int player)
 
 static void game_over(t_mlx *mlx, int player)
 {
-	ft_putendl("OUCH!!!");
+	system("clear");
+	printf("OUCH! Player %d crashed.\n", (player + 1));
 	KEYCONF[player]->game_over = 1;
 }
 
@@ -85,7 +88,6 @@ void	move_snake(t_mlx *mlx, int player)
 	t_snake *snake;
 
 	snake = SNAKEHEAD[player];
-	snake->old_pos = snake->cur_pos;
 	move_snake_head(mlx, snake, player);
 	if (check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
