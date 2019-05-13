@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:08:34 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/13 20:35:26 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 22:46:12 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void check_apple(t_mlx *mlx, int player)
 			add_snake_body(mlx, player);
 			grow++;
 		}
-		if (KEYCONF[player]->speed > 0)
-			KEYCONF[player]->speed -= 5;
+		if (KEYCONF[player]->speed > 18)
+			KEYCONF[player]->speed -= 2;
 	}
 }

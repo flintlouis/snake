@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/13 20:57:08 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 23:17:20 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,18 @@ int			press_key(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		close_window(NULL);
-	if (key == KEY_PLUS && KEYCONF[0]->speed > 0)
+	if (key == KEY_PLUS && KEYCONF[0]->speed > 18)
 	{
-		KEYCONF[0]->speed--;
+		KEYCONF[0]->speed -= 2;
+		printf("\nspeed : %ld\n", KEYCONF[0]->speed);
 		// add_snake_body(mlx, 0);
 	}
 	if (key == KEY_MIN)
-		KEYCONF[0]->speed++;
+	{
+		KEYCONF[0]->speed += 2;
+		printf("\nspeed : %ld\n", KEYCONF[0]->speed);
+
+	}
 	if (key == KEY_RIGHT && KEYCONF[0]->move != KEY_LEFT)
 		KEYCONF[0]->move = KEY_RIGHT;
 	else if (key == KEY_LEFT && KEYCONF[0]->move != KEY_RIGHT)

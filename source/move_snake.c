@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/13 20:59:35 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 23:20:50 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ static void move_snake_head(t_mlx *mlx, t_snake *snake, int player)
 		snake->cur_pos.y -= GRID;
 	else if (KEYCONF[player]->move == KEY_DOWN || KEYCONF[player]->move == KEY_S)
 		snake->cur_pos.y += GRID;
+	if (snake->cur_pos.x == snake->next->cur_pos.x && snake->cur_pos.y == snake->next->cur_pos.y)
+		ft_putendl("ERROR");
+	
 }
 
 static void game_over(t_mlx *mlx, int player)
