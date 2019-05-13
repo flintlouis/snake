@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/13 18:42:32 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 19:23:48 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void init_snake(t_mlx *mlx)
 	int i;
 	int player;
 
-	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake*) * mlx->players);
+	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake*) * (mlx->players + 1));
 	player = 0;
 	while (player < mlx->players)
 	{
@@ -48,8 +48,11 @@ void init_keyconf(t_mlx *mlx)
 	while (player < mlx->players)
 	{
 		KEYCONF[player] = MEM(t_keyconf);
-		KEYCONF[player]->move = KEY_RIGHT;
-		KEYCONF[player]->speed = 100;
+		if (player == 0)
+			KEYCONF[player]->move = KEY_RIGHT;
+		else
+			KEYCONF[player]->move = KEY_D;
+		KEYCONF[player]->speed = 70;
 		player++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/13 18:58:40 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 19:37:18 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int check_collision_player(t_mlx *mlx, int player)
 	t_snake *opponent_snake;
 
 	opponent = (player + 1) % 2;
-	if (!SNAKEHEAD[opponent])
+	if (mlx->players != 2)
 		return (0);
 	opponent_snake = SNAKEHEAD[opponent];
 	while (opponent_snake)
@@ -86,21 +86,15 @@ void	move_snake(t_mlx *mlx, int player)
 	snake = SNAKEHEAD[player];
 	snake->old_pos = snake->cur_pos;
 	move_snake_head(mlx, snake, player);
-	no_sides(snake); /* CAN PASS THROUGH SIDES */
-	if (check_collision_player(mlx, player))
-	{
+	if (check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
-		return ;
-	}
+	no_sides(snake); /* CAN PASS THROUGH SIDES */
 	while (snake->next)
 	{
 		move_snake_body(snake->next, snake->old_pos);
 		snake = snake->next;
 		if (check_collision(SNAKEHEAD[player], snake))
-		{
 			game_over(mlx, player);
-			return ;
-		}
 	}
 	// if (check_sides_collision(SNAKEHEAD[player])) /* CAN'T PASS THROUGH SIDES */
 		// game_over(mlx, player);
