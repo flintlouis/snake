@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/13 20:51:42 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 20:59:35 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	move_snake(t_mlx *mlx, int player)
 	move_snake_head(mlx, snake, player);
 	if (check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
-	no_sides(snake); /* CAN PASS THROUGH SIDES */
+	if (!mlx->walls)
+		no_sides(snake); /* CAN PASS THROUGH SIDES */
 	while (snake->next)
 	{
 		move_snake_body(snake->next, snake->old_pos);
@@ -94,7 +95,7 @@ void	move_snake(t_mlx *mlx, int player)
 		if (check_collision(SNAKEHEAD[player], snake))
 			game_over(mlx, player);
 	}
-	// if (check_sides_collision(SNAKEHEAD[player])) /* CAN'T PASS THROUGH SIDES */
-		// game_over(mlx, player);
+	if (mlx->walls && check_sides_collision(SNAKEHEAD[player])) /* CAN'T PASS THROUGH SIDES */
+		game_over(mlx, player);
 	check_apple(mlx, player);
 }

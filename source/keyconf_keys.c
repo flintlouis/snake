@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/13 18:03:35 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 20:57:08 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ int			release_key(int key, t_mlx *mlx)
 {
 	if (key == KEY_SPACE)
 		game_reset(mlx);
+	if (key == KEY_SHIFT)
+	{
+		mlx->walls = (mlx->walls + 1) % 2;
+		game_reset(mlx);
+	}
 	return (0);
 }
 

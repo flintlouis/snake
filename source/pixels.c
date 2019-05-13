@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:05:12 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/13 17:41:54 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/13 20:59:10 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	background(t_mlx *mlx)
 		x = 0;
 		while (x < WIDTH)
 		{
-			// if (y == 0 || x == 0 || x == WIDTH - GRID || y == HEIGHT - GRID) /* COMMENT OUT FOR NO SIDE COLOUR */
-			// 	colour = (t_colour){0x69, 0x69, 0x69};
-			// else
+			if (mlx->walls && (y == 0 || x == 0 || x == WIDTH - GRID || y == HEIGHT - GRID)) /* COMMENT OUT FOR NO SIDE COLOUR */
+				colour = (t_colour){0x69, 0x69, 0x69};
+			else
 				colour = (t_colour){0x1a, 0x3a, 0x3a};
 			put_square(mlx, (t_point){x, y}, colour);
 			x += GRID;
