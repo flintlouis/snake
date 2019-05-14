@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/13 23:51:42 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/14 09:19:05 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static	void game_reset(t_mlx *mlx)
 
 int			release_key(int key, t_mlx *mlx)
 {
+	if (key == KEY_1)
+		printf("apple.x : %d, apple.y : %d\n", mlx->apple->pos.x, mlx->apple->pos.y);
 	if (key == KEY_SPACE)
 		game_reset(mlx);
 	if (key == KEY_SHIFT)
