@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/13 23:54:31 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/13 23:57:26 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void snake(t_mlx* mlx)
 		while (player < mlx->players)
 		{
 			draw_snake(mlx, player);
-			if (KEYCONF[player]->ms >= KEYCONF[player]->speed) /* HOW TO DO THIS WITH 2 PLAYERS */
+			if (KEYCONF[player]->ms >= KEYCONF[player]->speed)
 			{
 				move_snake(mlx, player);
 				KEYCONF[player]->ms = 0;
@@ -95,7 +95,7 @@ int start_snake(t_mlx *mlx)
 	long		ms;
 
 	ms = time_between_frames();
-	if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED*/
+	if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
 		snake(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 	score = ft_itoa(KEYCONF[0]->score);
