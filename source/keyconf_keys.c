@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/14 09:19:05 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/14 15:35:56 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ static	void game_reset(t_mlx *mlx)
 
 	i = 0;
 	player = 0;
-	free(KEYCONF);
-	init_keyconf(mlx);
 	while (player < mlx->players)
 	{
 		delete_snake(SNAKEHEAD[player]);
+		free(KEYCONF[player]);
+		KEYCONF[player] = NULL;
 		player++;
 	}
+	free(SNAKEHEAD);
+	free(KEYCONF);
+	init_keyconf(mlx);
 	init_snake(mlx);
 	APPLE->on = 0;
 	system("clear");
@@ -50,8 +53,6 @@ static	void game_reset(t_mlx *mlx)
 
 int			release_key(int key, t_mlx *mlx)
 {
-	if (key == KEY_1)
-		printf("apple.x : %d, apple.y : %d\n", mlx->apple->pos.x, mlx->apple->pos.y);
 	if (key == KEY_SPACE)
 		game_reset(mlx);
 	if (key == KEY_SHIFT)

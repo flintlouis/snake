@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/06 11:45:51 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/14 09:17:34 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/14 15:31:29 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int				mouse_press(int button, int x, int y, t_mlx *mlx)
 		else if (KEYCONF[0]->move == KEY_UP)
 			KEYCONF[0]->move = KEY_RIGHT;
 	}
-	if (button == WHEEL_FORW || button == WHEEL_BACK)
-		printf("x : %d, y : %d\n", x, y);
 	return (0);
 }
 

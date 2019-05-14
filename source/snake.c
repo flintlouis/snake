@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/13 23:57:26 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/14 15:45:45 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,26 +74,25 @@ static void snake(t_mlx* mlx)
 	int player;
 
 	player = 0;
-		background(mlx);
-		// ft_bzero(mlx->data_addr, HEIGHT * WIDTH * (mlx->bits_per_pixel / 8));
-		place_apple(mlx);
-		while (player < mlx->players)
+	// ft_bzero(mlx->data_addr, HEIGHT * WIDTH * (mlx->bits_per_pixel / 8));
+	background(mlx);
+	place_apple(mlx);
+	while (player < mlx->players)
+	{
+		draw_snake(mlx, player);
+		if (KEYCONF[player]->ms >= KEYCONF[player]->speed)
 		{
-			draw_snake(mlx, player);
-			if (KEYCONF[player]->ms >= KEYCONF[player]->speed)
-			{
-				move_snake(mlx, player);
-				KEYCONF[player]->ms = 0;
-			}
-			player++;
+			move_snake(mlx, player);
+			KEYCONF[player]->ms = 0;
 		}
+		player++;
+	}
 }
 
 int start_snake(t_mlx *mlx)
 {
 	char		*score;
 	long		ms;
-
 	ms = time_between_frames();
 	if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
 		snake(mlx);
