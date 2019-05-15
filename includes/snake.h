@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/13 23:17:36 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/15 11:18:55 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef	struct			s_keyconf
 	long				ms;
 	int					game_over;
 	int					score;
+	char				updated:1; /* ONLY USES ONE BIT */
 }						t_keyconf;
 
 typedef	struct			s_mlx

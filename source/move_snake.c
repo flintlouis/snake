@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/13 23:50:32 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/15 11:27:26 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ static void move_snake_head(t_mlx *mlx, t_snake *snake, int player)
 	else if (KEYCONF[player]->move == KEY_UP || KEYCONF[player]->move == KEY_W)
 		snake->cur_pos.y -= GRID;
 	else if (KEYCONF[player]->move == KEY_DOWN || KEYCONF[player]->move == KEY_S)
-		snake->cur_pos.y += GRID;
-	if (snake->cur_pos.x == snake->next->cur_pos.x && snake->cur_pos.y == snake->next->cur_pos.y)
-		ft_putendl("ERROR");
-	
+		snake->cur_pos.y += GRID;	
 }
 
 static void game_over(t_mlx *mlx, int player)
@@ -92,7 +89,7 @@ void	move_snake(t_mlx *mlx, int player)
 	if (check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
 	if (!mlx->walls)
-		no_sides(snake); /* CAN PASS THROUGH SIDES */
+		no_sides(snake);
 	while (snake->next)
 	{
 		move_snake_body(snake->next, snake->old_pos);
@@ -100,7 +97,7 @@ void	move_snake(t_mlx *mlx, int player)
 		if (check_collision(SNAKEHEAD[player], snake))
 			game_over(mlx, player);
 	}
-	if (mlx->walls && check_sides_collision(SNAKEHEAD[player])) /* CAN'T PASS THROUGH SIDES */
+	if (mlx->walls && check_sides_collision(SNAKEHEAD[player]))
 		game_over(mlx, player);
 	check_apple(mlx, player);
 }

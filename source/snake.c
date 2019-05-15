@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/14 15:45:45 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/15 11:42:21 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,30 @@ void	add_snake_body(t_mlx *mlx, int player)
 void	draw_snake(t_mlx *mlx, int player)
 {
 	t_snake *snake;
-	t_colour colour1[2];
-	t_colour colour2[2];
+	t_colour colour[3];
 	int stripes;
 
 	stripes = 0;
 	snake = SNAKEHEAD[player];
 	if (player == 0)
-	{	
-		colour1[0] = (t_colour){0xED, 0x52, 0x24};
-		colour1[1] = (t_colour){0xED, 0xEA, 0x24};
+	{
+		colour[0] = (t_colour){0xFF, 0xFF, 0x00}; /* HEAD COLOUR */
+		colour[1] = (t_colour){0xFF, 0xC3, 0x00};
+		colour[2] = (t_colour){0xFF, 0x57, 0x33};
 	}
 	else
 	{
-		colour1[0] = (t_colour){0x22, 0x8B, 0x22};
-		colour1[1] = (t_colour){0x32, 0xCD, 0x32};
+		colour[0] = (t_colour){0x36, 0xFF, 0x00}; /* HEAD COLOUR */
+		colour[1] = (t_colour){0x31, 0xBD, 0x0B};
+		colour[2] = (t_colour){0x35, 0x90, 0x1C};
 	}
 	while (snake)
 	{
-		put_square(mlx, snake->cur_pos, colour1[stripes]);
+		put_square(mlx, snake->cur_pos, colour[stripes]);
 		snake = snake->next;
-		stripes = (stripes + 1) % 2;
+		stripes = (stripes + 1) % 3;
+		if (stripes == 0)
+			stripes++;
 	}
 }
 
@@ -84,6 +87,7 @@ static void snake(t_mlx* mlx)
 		{
 			move_snake(mlx, player);
 			KEYCONF[player]->ms = 0;
+			KEYCONF[player]->updated = 1;
 		}
 		player++;
 	}
