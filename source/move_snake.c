@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/20 22:30:41 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/21 00:35:48 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int check_sides_collision(t_snake *snake_head)
 static void no_sides(t_snake *snake)
 {
 	snake->cur_pos.x = snake->cur_pos.x == WIDTH ? 0 : snake->cur_pos.x;
-	snake->cur_pos.x= snake->cur_pos.x < 0 ? (WIDTH - GRID) : snake->cur_pos.x;
+	snake->cur_pos.x = snake->cur_pos.x < 0 ? (WIDTH - GRID) : snake->cur_pos.x;
 	snake->cur_pos.y = snake->cur_pos.y < 0 ? (HEIGHT - GRID) : snake->cur_pos.y;
 	snake->cur_pos.y = snake->cur_pos.y == HEIGHT ? 0 : snake->cur_pos.y;
 }
