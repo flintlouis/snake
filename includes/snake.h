@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/15 11:18:55 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 18:34:05 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "mlx.h"
 # include "libft.h"
 
-#include <stdio.h> ///
+#include <stdio.h>		///
 
 # define GRID			10
 # define HEIGHT			400
@@ -28,7 +28,8 @@
 
 # define KEY_ESC		53
 # define KEY_SPACE		49
-# define KEY_SHIFT		257
+# define KEY_LSHIFT		257
+# define KEY_RSHIFT		258
 # define KEY_UP			126
 # define KEY_DOWN		125
 # define KEY_RIGHT		124
@@ -80,8 +81,8 @@ typedef	struct			s_keyconf
 	int					move;
 	long				speed;
 	long				ms;
-	int					game_over;
 	int					score;
+	int					nitro;
 	char				updated:1; /* ONLY USES ONE BIT */
 }						t_keyconf;
 
@@ -95,7 +96,8 @@ typedef	struct			s_mlx
 	int					size_line;
 	int					endian;
 	int					players;
-	int					walls;
+	int					map;
+	int					game_over;
 	t_apple				*apple;
 	t_keyconf			**keyconf;
 	t_snake				**snake_head;

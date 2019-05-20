@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/15 11:19:43 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 17:59:27 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void setup_snake(int players)
 	srand(time(0));
 	mlx = init_mlx();
 	mlx->players = players;
+	mlx->map = KEY_1;
 	init_keyconf(mlx);
 	init_snake(mlx);
 	mlx->apple = MEM(t_apple);

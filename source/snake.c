@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/15 11:42:21 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 18:56:37 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,9 @@ static int get_player_info(t_mlx *mlx, long ms)
 	while (player < mlx->players)
 	{
 		KEYCONF[player]->ms += ms;
-		if (KEYCONF[player]->game_over == 1)
-			return (1);
 		player++;
 	}
-	return (0);
+	return (mlx->game_over);
 }
 
 static void snake(t_mlx* mlx)
@@ -77,7 +75,6 @@ static void snake(t_mlx* mlx)
 	int player;
 
 	player = 0;
-	// ft_bzero(mlx->data_addr, HEIGHT * WIDTH * (mlx->bits_per_pixel / 8));
 	background(mlx);
 	place_apple(mlx);
 	while (player < mlx->players)
@@ -93,22 +90,39 @@ static void snake(t_mlx* mlx)
 	}
 }
 
-int start_snake(t_mlx *mlx)
+static void score(t_mlx *mlx)
 {
 	char		*score;
-	long		ms;
+
+	score = ft_itoa(KEYCONF[0]->score);
+	mlx_string_put(mlx->mlx, mlx->win, 20, 20, 0xffffff, score);
+	free(score);
+}
+
+static void start_text(t_mlx *mlx, long ms)
+{
+	static long t;
+
+	t += ms;
+	if (t <= 2000)
+	{
+		if (mlx->players == 1)
+			mlx_string_put(mlx->mlx, mlx->win, 240, 100, 0xffffff, "GET A HIGHSCORE");
+		else
+			mlx_string_put(mlx->mlx, mlx->win, 210, 100, 0xffffff, "KILL THE OTHER PLAYER");
+	}
+}
+
+int start_snake(t_mlx *mlx)
+{
+	long	ms;
+	
 	ms = time_between_frames();
 	if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
 		snake(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
-	score = ft_itoa(KEYCONF[0]->score);
-	mlx_string_put(mlx->mlx, mlx->win, 20, 20, 0xffffff, score);
-	free(score);
-	if (mlx->players == 2)
-	{
-		score = ft_itoa(KEYCONF[1]->score);
-		mlx_string_put(mlx->mlx, mlx->win, (WIDTH - 30), 20, 0xffffff, score);
-		free(score);
-	}
+	if (mlx->players == 1)
+		score(mlx);
+	start_text(mlx, ms);
 	return (0);
 }
