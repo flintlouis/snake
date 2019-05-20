@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/20 22:25:19 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/21 00:01:15 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ static void score(t_mlx *mlx)
 static void start_text(t_mlx *mlx)
 {
 	if (GAME->players == 1)
-		mlx_string_put(mlx->mlx, mlx->win, 230, 100, 0xffffff, "GET A HIGHSCORE");
+		mlx_string_put(mlx->mlx, mlx->win, 220, 100, 0xffffff, "GET A HIGHSCORE");
 	else
-		mlx_string_put(mlx->mlx, mlx->win, 210, 100, 0xffffff, "KILL THE OTHER PLAYER");
+		mlx_string_put(mlx->mlx, mlx->win, 200, 100, 0xffffff, "KILL THE OTHER PLAYER");
 }
 
 static int get_player_info(t_mlx *mlx, long ms)

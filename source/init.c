@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/20 22:54:42 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/21 00:05:44 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void init_snake(t_mlx *mlx)
 		i = 0;
 		SNAKEHEAD[player] = MEM(t_snake);
 		if (GAME->players == 1)
-			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 2, HEIGHT / 2 - GRID};
+			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 8 - GRID, HEIGHT / 2 - GRID};
 		else
 			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 4 + (WIDTH / 2 * player), HEIGHT / 2 - GRID};
 		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
