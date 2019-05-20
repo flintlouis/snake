@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/20 18:48:12 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 22:38:32 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static	void game_reset(t_mlx *mlx)
 
 	i = 0;
 	player = 0;
-	while (player < mlx->players)
+	while (player < GAME->players)
 	{
 		delete_snake(SNAKEHEAD[player]);
 		free(KEYCONF[player]);
@@ -48,7 +48,8 @@ static	void game_reset(t_mlx *mlx)
 	init_keyconf(mlx);
 	init_snake(mlx);
 	APPLE->on = 0;
-	mlx->game_over = 0;
+	GAME->game_over = 0;
+	GAME->start_text = 0;
 	system("clear");
 }
 
@@ -58,17 +59,17 @@ int			release_key(int key, t_mlx *mlx)
 		game_reset(mlx);
 	if (key == KEY_1)
 	{
-		mlx->map = KEY_1;
+		GAME->map = KEY_1;
 		game_reset(mlx);
 	}
 	else if (key == KEY_2)
 	{
-		mlx->map = KEY_2;
+		GAME->map = KEY_2;
 		game_reset(mlx);
 	}
 	else if (key == KEY_3)
 	{
-		mlx->map = KEY_3;
+		GAME->map = KEY_3;
 		game_reset(mlx);
 	}
 	if (key == KEY_RSHIFT)
@@ -76,7 +77,7 @@ int			release_key(int key, t_mlx *mlx)
 		KEYCONF[0]->speed += 50;
 		KEYCONF[0]->nitro = 0;
 	}
-	if (mlx->players == 2 && key == KEY_LSHIFT)
+	if (GAME->players == 2 && key == KEY_LSHIFT)
 	{
 		KEYCONF[1]->speed += 50;
 		KEYCONF[1]->nitro = 0;
@@ -111,7 +112,7 @@ int			press_key(int key, t_mlx *mlx)
 	else if (key == KEY_DOWN && KEYCONF[0]->move != KEY_UP)
 		update_movement(KEY_DOWN, mlx, 0);
 	/* MOVEMENT PLAYER 2 */
-	if (mlx->players == 2)
+	if (GAME->players == 2)
 	{
 		if (key == KEY_RSHIFT && KEYCONF[0]->nitro != 1)
 		{

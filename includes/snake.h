@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/20 18:34:05 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 22:39:43 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define KEYCONF		mlx->keyconf
 # define SNAKEHEAD		mlx->snake_head
 # define APPLE			mlx->apple
+# define GAME			mlx->game
 
 # define KEY_ESC		53
 # define KEY_SPACE		49
@@ -86,6 +87,15 @@ typedef	struct			s_keyconf
 	char				updated:1; /* ONLY USES ONE BIT */
 }						t_keyconf;
 
+typedef	struct			s_game
+{
+	int					players;
+	int					map;
+	int					game_over;
+	long				start_text;
+
+}						t_game;
+
 typedef	struct			s_mlx
 {
 	void				*mlx;
@@ -95,9 +105,7 @@ typedef	struct			s_mlx
 	int					bits_per_pixel;
 	int					size_line;
 	int					endian;
-	int					players;
-	int					map;
-	int					game_over;
+	t_game				*game;
 	t_apple				*apple;
 	t_keyconf			**keyconf;
 	t_snake				**snake_head;

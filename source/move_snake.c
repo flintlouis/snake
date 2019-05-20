@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/20 18:38:17 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 22:30:41 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ static void game_over(t_mlx *mlx, int player)
 	char *snakes[2] = {"Yellow", "Green"};
 	
 	system("clear");
-	if (mlx->players == 1)
+	if (GAME->players == 1)
 		printf("OUCH! You crashed.\n");
 	else
 		printf("%s wins!\n", snakes[(player + 1) % 2]);
-	mlx->game_over = 1;
+	GAME->game_over = 1;
 }
 
 void	move_snake(t_mlx *mlx, int player)
@@ -93,7 +93,7 @@ void	move_snake(t_mlx *mlx, int player)
 	move_snake_head(mlx, snake, player);
 	if (check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
-	if (mlx->map == KEY_1)
+	if (GAME->map == KEY_1)
 		no_sides(snake);
 	while (snake->next)
 	{
@@ -102,7 +102,7 @@ void	move_snake(t_mlx *mlx, int player)
 		if (check_collision(SNAKEHEAD[player], snake))
 			game_over(mlx, player);
 	}
-	if (mlx->map == KEY_2 && check_sides_collision(SNAKEHEAD[player]))
+	if (GAME->map == KEY_2 && check_sides_collision(SNAKEHEAD[player]))
 		game_over(mlx, player);
 	check_apple(mlx, player);
 }

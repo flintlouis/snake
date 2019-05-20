@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/20 18:56:37 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 22:25:19 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,6 @@ void	draw_snake(t_mlx *mlx, int player)
 	}
 }
 
-static int get_player_info(t_mlx *mlx, long ms)
-{
-	int player;
-
-	player = 0;
-	while (player < mlx->players)
-	{
-		KEYCONF[player]->ms += ms;
-		player++;
-	}
-	return (mlx->game_over);
-}
-
 static void snake(t_mlx* mlx)
 {
 	int player;
@@ -77,7 +64,7 @@ static void snake(t_mlx* mlx)
 	player = 0;
 	background(mlx);
 	place_apple(mlx);
-	while (player < mlx->players)
+	while (player < GAME->players)
 	{
 		draw_snake(mlx, player);
 		if (KEYCONF[player]->ms >= KEYCONF[player]->speed)
@@ -99,18 +86,25 @@ static void score(t_mlx *mlx)
 	free(score);
 }
 
-static void start_text(t_mlx *mlx, long ms)
+static void start_text(t_mlx *mlx)
 {
-	static long t;
+	if (GAME->players == 1)
+		mlx_string_put(mlx->mlx, mlx->win, 230, 100, 0xffffff, "GET A HIGHSCORE");
+	else
+		mlx_string_put(mlx->mlx, mlx->win, 210, 100, 0xffffff, "KILL THE OTHER PLAYER");
+}
 
-	t += ms;
-	if (t <= 2000)
+static int get_player_info(t_mlx *mlx, long ms)
+{
+	int player;
+
+	player = 0;
+	while (player < GAME->players)
 	{
-		if (mlx->players == 1)
-			mlx_string_put(mlx->mlx, mlx->win, 240, 100, 0xffffff, "GET A HIGHSCORE");
-		else
-			mlx_string_put(mlx->mlx, mlx->win, 210, 100, 0xffffff, "KILL THE OTHER PLAYER");
+		KEYCONF[player]->ms += ms;
+		player++;
 	}
+	return (GAME->game_over);
 }
 
 int start_snake(t_mlx *mlx)
@@ -121,8 +115,10 @@ int start_snake(t_mlx *mlx)
 	if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
 		snake(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
-	if (mlx->players == 1)
+	if (GAME->players == 1)
 		score(mlx);
-	start_text(mlx, ms);
+	if (GAME->start_text <= 2500)
+		start_text(mlx);
+	GAME->start_text += ms;
 	return (0);
 }

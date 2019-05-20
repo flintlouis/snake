@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/20 17:59:27 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/20 22:54:42 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void init_snake(t_mlx *mlx)
 	int i;
 	int player;
 
-	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake*) * (mlx->players + 1));
+	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake*) * (GAME->players + 1));
 	player = 0;
-	while (player < mlx->players)
+	while (player < GAME->players)
 	{
 		i = 0;
 		SNAKEHEAD[player] = MEM(t_snake);
-		if (mlx->players == 1)
-			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 2, HEIGHT / 2 };
+		if (GAME->players == 1)
+			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 2, HEIGHT / 2 - GRID};
 		else
-			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 4 + (WIDTH / 2 * player), HEIGHT / 2 };
+			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 4 + (WIDTH / 2 * player), HEIGHT / 2 - GRID};
 		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
 		while (i < 5)
 		{
@@ -45,8 +45,8 @@ void init_keyconf(t_mlx *mlx)
 	int player;
 
 	player = 0;
-	KEYCONF = (t_keyconf**)malloc(sizeof(t_keyconf*) * mlx->players);
-	while (player < mlx->players)
+	KEYCONF = (t_keyconf**)malloc(sizeof(t_keyconf*) * GAME->players);
+	while (player < GAME->players)
 	{
 		KEYCONF[player] = MEM(t_keyconf);
 		if (player == 0)
@@ -72,14 +72,20 @@ static t_mlx *init_mlx(void)
 	return (mlx);
 }
 
+static void init_game(t_mlx *mlx, int players)
+{
+	GAME = MEM(t_game);
+	GAME->players = players;
+	GAME->map = KEY_1;
+}
+
 void setup_snake(int players)
 {
 	t_mlx *mlx;
 
 	srand(time(0));
 	mlx = init_mlx();
-	mlx->players = players;
-	mlx->map = KEY_1;
+	init_game(mlx, players);
 	init_keyconf(mlx);
 	init_snake(mlx);
 	mlx->apple = MEM(t_apple);
