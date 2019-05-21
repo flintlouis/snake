@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/21 16:44:12 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/21 19:44:06 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int			release_key(int key, t_mlx *mlx)
 		}
 		if (GAME->players == 2)
 		{
-			if (key == KEY_RSHIFT)
+			if (key == KEY_SPACE)
 			{
 				KEYCONF[0]->speed += 50;
 				KEYCONF[0]->nitro = 0;
@@ -167,6 +167,7 @@ int			press_key(int key, t_mlx *mlx)
 		if (key == KEY_P)
 			{
 				GAME->menu = 1;
+				GAME->map = KEY_1;
 				game_reset(mlx, KEY_P);
 			}
 	}
