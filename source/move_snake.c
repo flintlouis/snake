@@ -6,16 +6,35 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/21 00:35:48 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/21 14:17:34 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
 #include <stdlib.h>
 
+static int check_map3_collision(t_snake *snake_head)
+{
+	if ((snake_head->cur_pos.x < GRID && ((snake_head->cur_pos.y >= 0 && snake_head->cur_pos.y <= 140) || (snake_head->cur_pos.y >= 240 && snake_head->cur_pos.y <= HEIGHT))) ||
+	(snake_head->cur_pos.x >= WIDTH - GRID && ((snake_head->cur_pos.y >= 0 && snake_head->cur_pos.y <= 140) || (snake_head->cur_pos.y >= 240 && snake_head->cur_pos.y <= HEIGHT))) ||
+	(snake_head->cur_pos.y < GRID && ((snake_head->cur_pos.x >= 0 && snake_head->cur_pos.x <= 240) || (snake_head->cur_pos.x >= 340 && snake_head->cur_pos.x <= WIDTH))) ||
+	(snake_head->cur_pos.y >= HEIGHT - GRID && ((snake_head->cur_pos.x >= 0 && snake_head->cur_pos.x <= 240) || (snake_head->cur_pos.x >= 340 && snake_head->cur_pos.x <= WIDTH))) ||
+	(snake_head->cur_pos.x == 240 && (snake_head->cur_pos.y >= 140 && snake_head->cur_pos.y <= 240)) || (snake_head->cur_pos.x == 340 && (snake_head->cur_pos.y >= 140 && snake_head->cur_pos.y <= 240)))
+		return (1);
+	return (0);
+}
+
+static void map3_sides(t_snake *snake)
+{
+	snake->cur_pos.x = snake->cur_pos.x < 0 && (snake->cur_pos.y >= 150 && snake->cur_pos.y <= 230) ? (WIDTH - GRID) : snake->cur_pos.x;
+	snake->cur_pos.x = snake->cur_pos.x >= WIDTH && (snake->cur_pos.y >= 150 && snake->cur_pos.y <= 230) ? 0 : snake->cur_pos.x;
+	snake->cur_pos.y = snake->cur_pos.y < 0 && (snake->cur_pos.x >= 250 && snake->cur_pos.x <= 330) ? (HEIGHT - GRID) : snake->cur_pos.y;
+	snake->cur_pos.y = snake->cur_pos.y >= HEIGHT && (snake->cur_pos.x >= 250 && snake->cur_pos.x <= 330) ? 0 : snake->cur_pos.y;
+}
+
 static int check_sides_collision(t_snake *snake_head)
 {
-	if (snake_head->cur_pos.x == WIDTH - GRID || snake_head->cur_pos.y == HEIGHT - GRID
+	if (snake_head->cur_pos.x >= WIDTH - GRID || snake_head->cur_pos.y >= HEIGHT - GRID
 	|| snake_head->cur_pos.x < GRID || snake_head->cur_pos.y < GRID)
 		return (1);
 	return (0);
@@ -23,10 +42,10 @@ static int check_sides_collision(t_snake *snake_head)
 
 static void no_sides(t_snake *snake)
 {
-	snake->cur_pos.x = snake->cur_pos.x == WIDTH ? 0 : snake->cur_pos.x;
+	snake->cur_pos.x = snake->cur_pos.x >= WIDTH ? 0 : snake->cur_pos.x;
 	snake->cur_pos.x = snake->cur_pos.x < 0 ? (WIDTH - GRID) : snake->cur_pos.x;
 	snake->cur_pos.y = snake->cur_pos.y < 0 ? (HEIGHT - GRID) : snake->cur_pos.y;
-	snake->cur_pos.y = snake->cur_pos.y == HEIGHT ? 0 : snake->cur_pos.y;
+	snake->cur_pos.y = snake->cur_pos.y >= HEIGHT ? 0 : snake->cur_pos.y;
 }
 
 static int check_collision(t_snake *snake_head, t_snake *body)
@@ -76,8 +95,7 @@ static void move_snake_head(t_mlx *mlx, t_snake *snake, int player)
 static void game_over(t_mlx *mlx, int player)
 {
 	char *snakes[2] = {"Yellow", "Green"};
-	
-	system("clear");
+
 	if (GAME->players == 1)
 		printf("OUCH! You crashed.\n");
 	else
@@ -91,10 +109,18 @@ void	move_snake(t_mlx *mlx, int player)
 
 	snake = SNAKEHEAD[player];
 	move_snake_head(mlx, snake, player);
-	if (check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
+	if (GAME->players == 2 && check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
 	if (GAME->map == KEY_1)
 		no_sides(snake);
+	else if (GAME->map == KEY_2 && check_sides_collision(SNAKEHEAD[player]))
+		game_over(mlx, player);
+	else if (GAME->map == KEY_3)
+	{
+		map3_sides(snake);
+		if (check_map3_collision(SNAKEHEAD[player]))
+			game_over(mlx, player);
+	}
 	while (snake->next)
 	{
 		move_snake_body(snake->next, snake->old_pos);
@@ -102,7 +128,5 @@ void	move_snake(t_mlx *mlx, int player)
 		if (check_collision(SNAKEHEAD[player], snake))
 			game_over(mlx, player);
 	}
-	if (GAME->map == KEY_2 && check_sides_collision(SNAKEHEAD[player]))
-		game_over(mlx, player);
 	check_apple(mlx, player);
 }

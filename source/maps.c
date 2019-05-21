@@ -6,13 +6,13 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 17:42:43 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 00:04:24 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/21 13:27:23 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
 
-static void	map_1(t_mlx *mlx)
+static void	map1(t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -30,7 +30,7 @@ static void	map_1(t_mlx *mlx)
 	}
 }
 
-static void	map_2(t_mlx *mlx)
+static void	map2(t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -53,7 +53,7 @@ static void	map_2(t_mlx *mlx)
 	}
 }
 
-static void	map_3(t_mlx *mlx)
+static void	map3(t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -83,9 +83,9 @@ static void	map_3(t_mlx *mlx)
 void	background(t_mlx *mlx)
 {
 	if (GAME->map == KEY_1)
-		map_1(mlx);
+		map1(mlx);
 	else if (GAME->map == KEY_2)
-		map_2(mlx);
+		map2(mlx);
 	else
-		map_3(mlx);
+		map3(mlx);
 }
