@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/06 11:45:51 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 16:08:00 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/21 16:16:29 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,13 @@ int				mouse_release(int button, int x, int y, t_mlx *mlx)
 		{
 			GAME->players = 1;
 			GAME->menu = 0;
-			init_keyconf(mlx);
-			init_snake(mlx);
+			setup_game(mlx);
 		}
 		else if ((x >= 365 && x <= 460) && (y >= 90 && y <= 125))
 		{
 			GAME->players = 2;
 			GAME->menu = 0;
-			init_keyconf(mlx);
-			init_snake(mlx);
+			setup_game(mlx);
 		}
 	}
 	return (0);

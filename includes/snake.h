@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/21 16:05:44 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/21 16:35:58 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define KEY_D			2
 # define KEY_PLUS		24
 # define KEY_MIN		27
+# define KEY_R			15
 # define L_MOUSE		1
 # define R_MOUSE		2
 # define WHEEL_FORW		4
@@ -136,6 +137,7 @@ void					init_snake(t_mlx *mlx);
 void					ft_wait(int sec, long nsec);
 void					menu(t_mlx *mlx);
 void					menu_title(t_mlx *mlx);
+void					setup_game(t_mlx *mlx);
 long					time_between_frames(void);
 t_point					random_pixel(void);
 

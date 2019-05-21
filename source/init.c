@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 16:07:42 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/21 16:51:54 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_mlx *init_mlx(void)
 
 	mlx = MEM(t_mlx);
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "Snake");
+	mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "snake");
 	mlx->image = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
 	(mlx->data_addr = mlx_get_data_addr(mlx->image, &(mlx->bits_per_pixel),
 	&(mlx->size_line), &(mlx->endian)));
@@ -79,6 +79,13 @@ static void init_game(t_mlx *mlx)
 	GAME->menu = 1;
 }
 
+void	setup_game(t_mlx *mlx)
+{
+
+	init_keyconf(mlx);
+	init_snake(mlx);
+}
+
 void setup_snake(void)
 {
 	t_mlx *mlx;
@@ -86,8 +93,6 @@ void setup_snake(void)
 	srand(time(0));
 	mlx = init_mlx();
 	init_game(mlx);
-	// init_keyconf(mlx);
-	// init_snake(mlx);
 	mlx->apple = MEM(t_apple);
 	mlx_loop_hook(mlx->mlx, start_snake, mlx);
 	mlx_hook(mlx->win, 4, 1L << 2, mouse_press, mlx);
