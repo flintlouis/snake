@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/20 22:39:43 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/21 16:05:44 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define KEY_1			18
 # define KEY_2			19
 # define KEY_3			20
+# define KEY_P			35
 
 typedef unsigned char	t_byte;
 
@@ -92,6 +93,9 @@ typedef	struct			s_game
 	int					players;
 	int					map;
 	int					game_over;
+	int					menu;
+	int					p1;
+	int					p2;
 	long				start_text;
 
 }						t_game;
@@ -126,10 +130,12 @@ void					background(t_mlx *mlx);
 void					init_keyconf(t_mlx *mlx);
 void					add_snake_body(t_mlx *mlx, int player);
 void					put_pixel(int x, int y, t_mlx *mlx, t_colour colour);
-void					setup_snake(int players);
+void					setup_snake(void);
 void					put_square(t_mlx *mlx, t_point pixel, t_colour colour);
 void					init_snake(t_mlx *mlx);
 void					ft_wait(int sec, long nsec);
+void					menu(t_mlx *mlx);
+void					menu_title(t_mlx *mlx);
 long					time_between_frames(void);
 t_point					random_pixel(void);
 

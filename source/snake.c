@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 00:01:15 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/21 16:05:10 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,18 +107,28 @@ static int get_player_info(t_mlx *mlx, long ms)
 	return (GAME->game_over);
 }
 
-int start_snake(t_mlx *mlx)
+int			start_snake(t_mlx *mlx)
 {
 	long	ms;
 	
-	ms = time_between_frames();
-	if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
-		snake(mlx);
+	if (GAME->menu)
+		menu(mlx);
+	else
+	{
+		ms = time_between_frames();
+		if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
+			snake(mlx);
+	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
-	if (GAME->players == 1)
-		score(mlx);
-	if (GAME->start_text <= 2500)
-		start_text(mlx);
-	GAME->start_text += ms;
+	if (GAME->menu)
+		menu_title(mlx);
+	else
+	{
+		if (GAME->players == 1)
+			score(mlx);
+		if (GAME->start_text <= 2500)
+			start_text(mlx);
+		GAME->start_text += ms;
+	}
 	return (0);
 }

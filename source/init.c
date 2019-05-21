@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 13:02:18 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/21 16:07:42 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,22 @@ static t_mlx *init_mlx(void)
 	return (mlx);
 }
 
-static void init_game(t_mlx *mlx, int players)
+static void init_game(t_mlx *mlx)
 {
 	GAME = MEM(t_game);
-	GAME->players = players;
 	GAME->map = KEY_1;
+	GAME->menu = 1;
 }
 
-void setup_snake(int players)
+void setup_snake(void)
 {
 	t_mlx *mlx;
 
 	srand(time(0));
 	mlx = init_mlx();
-	init_game(mlx, players);
-	init_keyconf(mlx);
-	init_snake(mlx);
+	init_game(mlx);
+	// init_keyconf(mlx);
+	// init_snake(mlx);
 	mlx->apple = MEM(t_apple);
 	mlx_loop_hook(mlx->mlx, start_snake, mlx);
 	mlx_hook(mlx->win, 4, 1L << 2, mouse_press, mlx);
