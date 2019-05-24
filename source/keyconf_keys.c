@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/21 16:44:12 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/24 18:01:21 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static	void game_reset(t_mlx *mlx, int key)
 
 	i = 0;
 	player = 0;
+	system("clear");
 	while (player < GAME->players)
 	{
 		delete_snake(SNAKEHEAD[player]);
@@ -90,13 +91,13 @@ int			release_key(int key, t_mlx *mlx)
 			GAME->map = KEY_3;
 			game_reset(mlx, KEY_R);
 		}
+		if (key == KEY_SPACE)
+		{
+			KEYCONF[0]->speed += 50;
+			KEYCONF[0]->nitro = 0;
+		}
 		if (GAME->players == 2)
 		{
-			if (key == KEY_RSHIFT)
-			{
-				KEYCONF[0]->speed += 50;
-				KEYCONF[0]->nitro = 0;
-			}
 			if (key == KEY_LSHIFT)
 			{
 				KEYCONF[1]->speed += 50;
@@ -126,6 +127,12 @@ int			press_key(int key, t_mlx *mlx)
 			GAME->p1 = 1;
 		else if (key == KEY_2 && !GAME->p1)
 			GAME->p2 = 1;
+		if (key == KEY_R)
+			GAME->r++;
+		if (key == KEY_G)
+			GAME->g++;
+		if (key == KEY_B)
+			GAME->b++;
 	}
 	if (!GAME->menu)
 	{
@@ -142,14 +149,14 @@ int			press_key(int key, t_mlx *mlx)
 			update_movement(KEY_UP, mlx, 0);
 		if (key == KEY_DOWN && KEYCONF[0]->move != KEY_UP)
 			update_movement(KEY_DOWN, mlx, 0);
+		if (key == KEY_SPACE && KEYCONF[0]->nitro != 1)
+		{
+			KEYCONF[0]->speed -= 50;
+			KEYCONF[0]->nitro = 1;
+		}
 		/* MOVEMENT PLAYER 2 */
 		if (GAME->players == 2)
 		{
-			if (key == KEY_SPACE && KEYCONF[0]->nitro != 1)
-			{
-				KEYCONF[0]->speed -= 50;
-				KEYCONF[0]->nitro = 1;
-			}
 			if (key == KEY_D && KEYCONF[1]->move != KEY_A)
 				update_movement(KEY_D, mlx, 1);
 			if (key == KEY_A && KEYCONF[1]->move != KEY_D)

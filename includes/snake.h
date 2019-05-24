@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/21 16:35:58 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/24 17:44:40 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define KEY_PLUS		24
 # define KEY_MIN		27
 # define KEY_R			15
+# define KEY_G			5
+# define KEY_B			11
 # define L_MOUSE		1
 # define R_MOUSE		2
 # define WHEEL_FORW		4
@@ -91,6 +93,9 @@ typedef	struct			s_keyconf
 
 typedef	struct			s_game
 {
+	int					r;
+	int					g;
+	int					b;
 	int					players;
 	int					map;
 	int					game_over;

@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 16:51:54 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/24 18:27:36 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,14 @@ static void init_game(t_mlx *mlx)
 	GAME = MEM(t_game);
 	GAME->map = KEY_1;
 	GAME->menu = 1;
+	GAME->r = 0x45;
+	GAME->g = 0x53;
+	GAME->b = 0x31;
 }
 
 void	setup_game(t_mlx *mlx)
 {
-
+	system("clear");
 	init_keyconf(mlx);
 	init_snake(mlx);
 }

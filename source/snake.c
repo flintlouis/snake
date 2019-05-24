@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 16:05:10 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/24 18:00:54 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ int			start_snake(t_mlx *mlx)
 	long	ms;
 	
 	if (GAME->menu)
+	{
+		ms = 0;
 		menu(mlx);
+	}
 	else
 	{
 		ms = time_between_frames();
