@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/24 18:01:21 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/24 19:34:12 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ int			press_key(int key, t_mlx *mlx)
 		if (key == KEY_P)
 			{
 				GAME->menu = 1;
+				GAME->map = KEY_1;
 				game_reset(mlx, KEY_P);
 			}
 	}
