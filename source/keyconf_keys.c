@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/25 18:19:24 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/25 18:21:18 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,12 @@ static void	update_movement(int key, t_mlx *mlx, int player)
 
 int			press_key(int key, t_mlx *mlx)
 {
-	char *ai[2] = {"off", "on"};
 
 	if (key == KEY_ESC)
 		close_window(NULL);
 	if (key == KEY_G)
 	{
+		char *ai[2] = {"off", "on"};
 		GAME->ai = (GAME->ai + 1) % 2;
 		printf("AI is %s\n", ai[GAME->ai]);
 	}
