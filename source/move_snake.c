@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/21 14:17:34 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/25 18:08:42 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void no_sides(t_snake *snake)
 	snake->cur_pos.y = snake->cur_pos.y >= HEIGHT ? 0 : snake->cur_pos.y;
 }
 
-static int check_collision(t_snake *snake_head, t_snake *body)
+int check_collision(t_snake *snake_head, t_snake *body)
 {
 	if (!body)
 		return (0);
@@ -73,7 +73,7 @@ static int check_collision_player(t_mlx *mlx, int player)
 	return (0);
 }
 
-static void	move_snake_body(t_snake *body, t_point new_pos)
+void	move_snake_body(t_snake *body, t_point new_pos)
 {
 	body->old_pos = body->cur_pos;
 	body->cur_pos = new_pos;
@@ -109,7 +109,7 @@ void	move_snake(t_mlx *mlx, int player)
 
 	snake = SNAKEHEAD[player];
 	move_snake_head(mlx, snake, player);
-	if (GAME->players == 2 && check_collision_player(mlx, player)) /* HEAD ON COLLISION LOOKS WIERD */
+	if (GAME->players == 2 && check_collision_player(mlx, player)) /* HEAD-ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
 	if (GAME->map == KEY_1)
 		no_sides(snake);

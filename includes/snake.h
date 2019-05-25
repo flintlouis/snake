@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/24 17:44:40 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/25 18:12:22 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,7 @@ typedef	struct			s_keyconf
 
 typedef	struct			s_game
 {
-	int					r;
-	int					g;
-	int					b;
+	int					ai;
 	int					players;
 	int					map;
 	int					game_over;
@@ -103,6 +101,7 @@ typedef	struct			s_game
 	int					p1;
 	int					p2;
 	long				start_text;
+	t_colour			colour;
 
 }						t_game;
 
@@ -121,6 +120,9 @@ typedef	struct			s_mlx
 	t_snake				**snake_head;
 }						t_mlx;
 
+int 					check_collision(t_snake *snake_head, t_snake *body);
+void					move_snake_body(t_snake *body, t_point new_pos);
+
 int						mouse_move(int x, int y, t_mlx *mlx);
 int						mouse_press(int button, int x, int y, t_mlx *mlx);
 int						mouse_release(int button, int x, int y, t_mlx *mlx);
@@ -128,6 +130,9 @@ int						close_window(void *ptr);
 int						release_key(int key, t_mlx *mlx);
 int						press_key(int key, t_mlx *mlx);
 int						start_snake(t_mlx *mlx);
+void					turn_left(t_mlx *mlx);
+void					turn_right(t_mlx *mlx);
+void					ai_snake(t_mlx *mlx);
 void					draw_snake(t_mlx *mlx, int player);
 void					move_snake(t_mlx *mlx, int player);
 void					place_apple(t_mlx *mlx);

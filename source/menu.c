@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/21 14:30:28 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/24 19:30:29 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/25 18:15:18 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	menu(t_mlx *mlx)
 		{
 			if ((GAME->p1 && (x >= 140 && x <= 235) && (y >= 90 && y <= 125))
 			|| (GAME->p2 && (x >= 365 && x <= 460) && (y >= 90 && y <= 125)))
-				colour = (t_colour){(GAME->r - 20), (GAME->g - 20), (GAME->b - 20)};
+				colour = (t_colour){(GAME->colour.r - 20), (GAME->colour.g - 20), (GAME->colour.b - 20)};
 			else
-				colour = (t_colour){GAME->r, GAME->g, GAME->b};
+				colour = GAME->colour;
 			put_square(mlx, (t_point){x, y}, colour);
 			x += GRID;
 		}
