@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/26 22:12:09 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 22:34:22 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ typedef	struct			s_mlx
 	t_keyconf			**keyconf;
 	t_snake				**snake_head;
 }						t_mlx;
+
+void game_reset(t_mlx *mlx, int key); /* <------ */
 
 int						check_sides_collision(t_snake *snake_head);
 int 					check_collision(t_snake *snake_head, t_snake *body);

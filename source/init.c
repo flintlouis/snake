@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/26 22:26:51 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 22:33:21 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void init_keyconf(t_mlx *mlx)
 			KEYCONF[player]->move = KEY_RIGHT;
 		else
 			KEYCONF[player]->move = KEY_D;
-		KEYCONF[player]->speed = 100;
+		KEYCONF[player]->speed = 30;//100; /* <----- */
 		KEYCONF[player]->updated = 1;
 		player++;
 	}
@@ -76,7 +76,7 @@ static void init_game(t_mlx *mlx)
 	GAME = MEM(t_game);
 	GAME->map = KEY_1;
 	GAME->menu = 1;
-	// GAME->ai = 1; /* <----- */
+	GAME->ai = 1; /* <----- */
 	GAME->menu_colour = (t_colour){0x45, 0x53, 0x31};
 }
 
