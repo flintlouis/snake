@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 22:36:47 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 23:18:55 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,13 @@ void	move_snake(t_mlx *mlx, int player)
 		if (check_collision(SNAKEHEAD[player], snake))
 			game_over(mlx, player);
 	}
-	check_apple(mlx, player);
+	if (check_apple(mlx, player))
+	{
+		place_apple(mlx);
+		if (GAME->ai) /* ONLY FOR AI3 */
+		{
+			calc_apple_turn(mlx, &(KEYCONF[0]->move)); /* ONLY FOR AI3 */
+			check_ai(mlx, &(KEYCONF[0]->move)); /* ONLY FOR AI3 */
+		}
+	}
 }

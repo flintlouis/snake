@@ -6,25 +6,24 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 22:26:34 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 23:26:54 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
 #include <stdlib.h>
 
-	/* FOR BOX */
-
-	// if (APPLE->pos.x != SNAKEHEAD[0]->cur_pos.x && /* APPLE BEHIND SNAKEHEAD */
-	// ((APPLE->pos.y >= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_UP) ||
-	// (APPLE->pos.y <= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_DOWN)))
-	// if (APPLE->pos.x < SNAKEHEAD[0]->cur_pos.x)
-	// {
-	//	ft_putendl("TURN LEFT");
-	// }
-	// else if (APPLE->pos.x > SNAKEHEAD[0]->cur_pos.x)
-	// 	ft_putendl("TURN RIGHT");
-	// }
+/* FOR BOX */
+// if (APPLE->pos.x != SNAKEHEAD[0]->cur_pos.x && /* APPLE BEHIND SNAKEHEAD */
+// ((APPLE->pos.y >= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_UP) ||
+// (APPLE->pos.y <= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_DOWN)))
+// if (APPLE->pos.x < SNAKEHEAD[0]->cur_pos.x)
+// {
+//	ft_putendl("TURN LEFT");
+// }
+// else if (APPLE->pos.x > SNAKEHEAD[0]->cur_pos.x)
+// 	ft_putendl("TURN RIGHT");
+// }
 
 static int		calc_apple_behind_width(t_mlx *mlx)
 {
@@ -226,6 +225,24 @@ static void	ai_map2(t_mlx *mlx, int *move)
 		turn_right(move);
 }
 
+void	check_ai(t_mlx *mlx, int *move)
+{
+	int time_out;
+
+	time_out = 0;
+	while (check_possibility(mlx, *move) && time_out < 4)
+	{
+		if (!time_out)
+			calc_apple_turn(mlx, move);
+		else
+			turn_left(move);
+		time_out++;
+	}
+
+}
+
+/* FUNCTION CHECK BOX? FUNCTION CHECK 1 MOVE A HEAD (AGAINST STAIR LOCK) */
+
 void	ai_snake(t_mlx *mlx)
 {
 	int move;
@@ -248,5 +265,65 @@ void	ai_snake(t_mlx *mlx)
 			turn_left(&move);
 		time_out++;
 	}
+	KEYCONF[0]->move = move;
+}
+
+void	ai_snake1(t_mlx *mlx)
+{
+	int move;
+	int time_out;
+
+	move = KEYCONF[0]->move;
+	if (GAME->map == KEY_1)
+		ai_map1(mlx, &move);
+	else if (GAME->map == KEY_2)
+		ai_map2(mlx, &move);
+	time_out = 0;
+	while (check_possibility(mlx, move) && time_out < 4)
+	{
+		if (!time_out)
+			calc_apple_turn(mlx, &move);
+		else
+			turn_left(&move);
+		time_out++;
+	}
+	KEYCONF[0]->move = move;
+}
+
+void	ai_snake2(t_mlx *mlx)
+{
+	int move;
+	int time_out;
+
+	move = KEYCONF[0]->move;
+	if (GAME->map == KEY_1)
+	{
+		// if (!ai_map1(mlx, &move))
+			calc_apple_turn(mlx, &move);
+	}
+	else if (GAME->map == KEY_2)
+		ai_map2(mlx, &move);
+	time_out = 0;
+	while (check_possibility(mlx, move) && time_out < 4)
+	{
+		if (!time_out)
+			calc_apple_turn(mlx, &move);
+		else
+			turn_left(&move);
+		time_out++;
+	}
+	KEYCONF[0]->move = move;
+}
+
+void	ai_snake3(t_mlx *mlx)
+{
+	int move;
+
+	move = KEYCONF[0]->move;
+	if (GAME->map == KEY_1)
+		ai_map1(mlx, &move);
+	else if (GAME->map == KEY_2)
+		ai_map2(mlx, &move);
+	check_ai(mlx, &move);
 	KEYCONF[0]->move = move;
 }
