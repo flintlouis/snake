@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:08:34 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 21:00:05 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 22:10:42 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 void place_apple(t_mlx *mlx)
 {
 	if (!APPLE->on)
-		APPLE->pos = random_pixel();
-	if (GAME->map == KEY_3)
 	{
-		while ((APPLE->pos.x == 240 && ((APPLE->pos.y >= 140 && APPLE->pos.y <= 240)))
-		|| (APPLE->pos.x == 340 && ((APPLE->pos.y >= 140 && APPLE->pos.y <= 240))))
-			APPLE->pos = random_pixel();
+		APPLE->pos = random_pixel();
+		if (GAME->map == KEY_3)
+		{
+			while ((APPLE->pos.x == 240 && ((APPLE->pos.y >= 140 && APPLE->pos.y <= 240)))
+			|| (APPLE->pos.x == 340 && ((APPLE->pos.y >= 140 && APPLE->pos.y <= 240))))
+				APPLE->pos = random_pixel();
+		}
 	}
 	put_square(mlx, APPLE->pos, (t_colour){0xB2, 0x22, 0x22});
 	APPLE->on = 1;
 }
-void	calc_apple_turn(t_mlx *mlx, int *move);////
+
 void check_apple(t_mlx *mlx, int player)
 {
 	int grow;

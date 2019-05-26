@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 21:07:53 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 22:26:34 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ static int		calc_apple_behind_height(t_mlx *mlx)
 
 void	calc_apple_turn(t_mlx *mlx, int *move)
 {
-	int behind;
-
-
 	if (calc_apple_behind_height(mlx) || (APPLE->pos.x != SNAKEHEAD[0]->cur_pos.x && /* APPLE BEHIND SNAKEHEAD */
 	((APPLE->pos.y >= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_UP) ||
 	(APPLE->pos.y <= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_DOWN))))
@@ -165,7 +162,7 @@ static int check_possibility(t_mlx *mlx, int move)
 	return (crashed);
 }
 
-static void ai_map1(t_mlx *mlx, int *move)
+static int ai_map1(t_mlx *mlx, int *move)
 {
 	int side;
 	int no_side;
@@ -210,6 +207,9 @@ static void ai_map1(t_mlx *mlx, int *move)
 		else
 			*move = KEY_LEFT;
 	}
+	else
+		return (0);
+	return (1);
 }
 
 static void	ai_map2(t_mlx *mlx, int *move)
@@ -233,17 +233,20 @@ void	ai_snake(t_mlx *mlx)
 
 	move = KEYCONF[0]->move;
 	if (GAME->map == KEY_1)
-		ai_map1(mlx, &move);
+	{
+		if (!ai_map1(mlx, &move))
+			calc_apple_turn(mlx, &move);
+	}
 	else if (GAME->map == KEY_2)
 		ai_map2(mlx, &move);
-	calc_apple_turn(mlx, &move);
 	time_out = 0;
-	while (check_possibility(mlx, move) && time_out++ < 4)
+	while (check_possibility(mlx, move) && time_out < 4)
 	{
 		if (!time_out)
 			calc_apple_turn(mlx, &move);
 		else
 			turn_left(&move);
+		time_out++;
 	}
 	KEYCONF[0]->move = move;
 }

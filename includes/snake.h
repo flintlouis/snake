@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/26 18:34:35 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 22:12:09 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,8 @@ typedef	struct			s_mlx
 	t_snake				**snake_head;
 }						t_mlx;
 
-int 					check_collision(t_snake *snake_head, t_snake *body);
-void					move_snake_body(t_snake *body, t_point new_pos);
-void					move_snake_head(t_snake *snake, int move);
-void					no_sides(t_snake *snake);
-void					delete_snake(t_snake *snake);
 int						check_sides_collision(t_snake *snake_head);
-
+int 					check_collision(t_snake *snake_head, t_snake *body);
 int						mouse_move(int x, int y, t_mlx *mlx);
 int						mouse_press(int button, int x, int y, t_mlx *mlx);
 int						mouse_release(int button, int x, int y, t_mlx *mlx);
@@ -134,6 +129,11 @@ int						close_window(void *ptr);
 int						release_key(int key, t_mlx *mlx);
 int						press_key(int key, t_mlx *mlx);
 int						start_snake(t_mlx *mlx);
+void					move_snake_body(t_snake *body, t_point new_pos);
+void					move_snake_head(t_snake *snake, int move);
+void					no_sides(t_snake *snake);
+void					delete_snake(t_snake *snake);
+void					calc_apple_turn(t_mlx *mlx, int *move);
 void					turn_left(int *move);
 void					turn_right(int *move);
 void					ai_snake(t_mlx *mlx);

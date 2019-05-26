@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/26 17:13:20 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 22:14:00 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ int			press_key(int key, t_mlx *mlx)
 	if (!GAME->menu)
 	{
 		if (key == KEY_PLUS && KEYCONF[0]->speed > 18)
-			KEYCONF[0]->speed -= 2;
+			calc_apple_turn(mlx, &(KEYCONF[0]->move));
+			// KEYCONF[0]->speed -= 2;
 		if (key == KEY_MIN)
 			KEYCONF[0]->speed += 2;
 		/* MOVEMENT PLAYER 1 */
