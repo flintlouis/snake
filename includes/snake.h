@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/26 17:13:33 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 17:47:17 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void					move_snake_body(t_snake *body, t_point new_pos);
 void					move_snake_head(t_snake *snake, int move);
 void					no_sides(t_snake *snake);
 void					delete_snake(t_snake *snake);
+int						check_sides_collision(t_snake *snake_head);
 
 int						mouse_move(int x, int y, t_mlx *mlx);
 int						mouse_press(int button, int x, int y, t_mlx *mlx);

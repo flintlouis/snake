@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 17:10:39 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 17:47:04 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void map3_sides(t_snake *snake)
 	snake->cur_pos.y = snake->cur_pos.y >= HEIGHT && (snake->cur_pos.x >= 250 && snake->cur_pos.x <= 330) ? 0 : snake->cur_pos.y;
 }
 
-static int check_sides_collision(t_snake *snake_head)
+int check_sides_collision(t_snake *snake_head)
 {
 	if (snake_head->cur_pos.x >= WIDTH - GRID || snake_head->cur_pos.y >= HEIGHT - GRID
 	|| snake_head->cur_pos.x < GRID || snake_head->cur_pos.y < GRID)

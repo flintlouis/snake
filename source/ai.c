@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 17:43:11 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 17:48:38 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,21 @@ static int check_possibility(t_mlx *mlx, int move)
 	move_snake_head(tmp_cp, move);
 	if (GAME->map == KEY_1)
 		no_sides(tmp_cp);
+	// if (GAME->players == 2 && check_collision_player(mlx, player)) /* HEAD-ON COLLISION LOOKS WIERD */
+	// 	game_over(mlx, player);
+	else if (GAME->map == KEY_2 && check_sides_collision(tmp_cp))
+	{
+		delete_snake(copied_snake[0]);
+		free(copied_snake);
+		return (1);
+	}
+	// else if (GAME->map == KEY_3)
+	// {
+	// 	map3_sides(snake);
+	// 	if (check_map3_collision(SNAKEHEAD[player]))
+	// 		game_over(mlx, player);
+	// }
+
 	while (tmp_cp->next)
 	{
 		move_snake_body(tmp_cp->next, tmp_cp->old_pos);
