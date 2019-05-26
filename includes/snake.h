@@ -6,12 +6,12 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/26 17:47:17 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 18:34:35 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SNAKE_H
-# define SNAKE_H
+#ifndef SNAKE
+# define SNAKE
 
 # include "mlx.h"
 # include "libft.h"

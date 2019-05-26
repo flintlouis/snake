@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/26 16:04:19 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 21:08:47 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void init_keyconf(t_mlx *mlx)
 			KEYCONF[player]->move = KEY_RIGHT;
 		else
 			KEYCONF[player]->move = KEY_D;
-		KEYCONF[player]->speed = 100;
+		KEYCONF[player]->speed = 30;//100; /* <----- */
 		KEYCONF[player]->updated = 1;
 		player++;
 	}

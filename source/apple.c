@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:08:34 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 16:04:53 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 21:00:05 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void place_apple(t_mlx *mlx)
 	put_square(mlx, APPLE->pos, (t_colour){0xB2, 0x22, 0x22});
 	APPLE->on = 1;
 }
-
+void	calc_apple_turn(t_mlx *mlx, int *move);////
 void check_apple(t_mlx *mlx, int player)
 {
 	int grow;
