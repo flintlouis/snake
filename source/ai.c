@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 23:26:54 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/27 00:24:49 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static t_snake **copy_snake(t_mlx *mlx)
 	return(copy_snake);
 }
 
-static int check_possibility(t_mlx *mlx, int move)
+static int check_possibility(t_mlx *mlx, int move) /* WORK IN PROGRESS */
 {
 	t_snake **copied_snake;
 	t_snake *tmp_cp;
@@ -148,7 +148,6 @@ static int check_possibility(t_mlx *mlx, int move)
 	// 	if (check_map3_collision(SNAKEHEAD[player]))
 	// 		game_over(mlx, player);
 	// }
-
 	while (tmp_cp->next)
 	{
 		move_snake_body(tmp_cp->next, tmp_cp->old_pos);
@@ -241,12 +240,13 @@ void	check_ai(t_mlx *mlx, int *move)
 
 }
 
-/* FUNCTION CHECK BOX? FUNCTION CHECK 1 MOVE A HEAD (AGAINST STAIR LOCK) */
+/* FUNCTION CHECK BOX? FUNCTION CHECK 1 MOVE A HEAD (AGAINST STAIR LOCK)
+** CHECK_POSSIBILITY RECURSIVE????
+*/
 
 void	ai_snake(t_mlx *mlx)
 {
 	int move;
-	int time_out;
 
 	move = KEYCONF[0]->move;
 	if (GAME->map == KEY_1)
@@ -256,44 +256,26 @@ void	ai_snake(t_mlx *mlx)
 	}
 	else if (GAME->map == KEY_2)
 		ai_map2(mlx, &move);
-	time_out = 0;
-	while (check_possibility(mlx, move) && time_out < 4)
-	{
-		if (!time_out)
-			calc_apple_turn(mlx, &move);
-		else
-			turn_left(&move);
-		time_out++;
-	}
+	check_ai(mlx, &move);	
 	KEYCONF[0]->move = move;
 }
 
 void	ai_snake1(t_mlx *mlx)
 {
 	int move;
-	int time_out;
 
 	move = KEYCONF[0]->move;
 	if (GAME->map == KEY_1)
 		ai_map1(mlx, &move);
 	else if (GAME->map == KEY_2)
 		ai_map2(mlx, &move);
-	time_out = 0;
-	while (check_possibility(mlx, move) && time_out < 4)
-	{
-		if (!time_out)
-			calc_apple_turn(mlx, &move);
-		else
-			turn_left(&move);
-		time_out++;
-	}
+	check_ai(mlx, &move);
 	KEYCONF[0]->move = move;
 }
 
 void	ai_snake2(t_mlx *mlx)
 {
 	int move;
-	int time_out;
 
 	move = KEYCONF[0]->move;
 	if (GAME->map == KEY_1)
@@ -303,15 +285,7 @@ void	ai_snake2(t_mlx *mlx)
 	}
 	else if (GAME->map == KEY_2)
 		ai_map2(mlx, &move);
-	time_out = 0;
-	while (check_possibility(mlx, move) && time_out < 4)
-	{
-		if (!time_out)
-			calc_apple_turn(mlx, &move);
-		else
-			turn_left(&move);
-		time_out++;
-	}
+	check_ai(mlx, &move);	
 	KEYCONF[0]->move = move;
 }
 
