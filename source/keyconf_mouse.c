@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/06 11:45:51 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/25 15:04:08 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 17:06:59 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int				mouse_press(int button, int x, int y, t_mlx *mlx)
 	if (!GAME->menu)
 	{
 		if (button == L_MOUSE)
-			turn_left(mlx);
+			turn_left(&(KEYCONF[0]->move));
 		else if (button == R_MOUSE)
-			turn_right(mlx);
+			turn_right(&(KEYCONF[0]->move));
 	}
 	return (0);
 }

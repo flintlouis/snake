@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:08:34 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/21 16:58:47 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/26 16:04:53 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void check_apple(t_mlx *mlx, int player)
 		KEYCONF[player]->score += 5;
 		while (grow < 3)
 		{
-			add_snake_body(mlx, player);
+			add_snake_body(SNAKEHEAD[player]);
 			grow++;
 		}
 		if (GAME->players == 1 && KEYCONF[0]->speed > 18)

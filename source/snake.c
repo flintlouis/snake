@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/25 18:11:20 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 16:02:48 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-void	add_snake_body(t_mlx *mlx, int player)
+void	add_snake_body(t_snake *snake_head)
 {
 	t_snake *snake_body;
 
-	snake_body = SNAKEHEAD[player];
+	snake_body = snake_head;
 	while (snake_body->next)
 		snake_body = snake_body->next;
 	snake_body->next = MEM(t_snake);

@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/25 18:21:18 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 17:13:20 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			close_window(void *ptr)
 	return (0);
 }
 
-static void	delete_snake(t_snake *snake)
+void	delete_snake(t_snake *snake)
 {
 	if (!snake)
 		return ;

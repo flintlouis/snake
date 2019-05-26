@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/25 18:08:42 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 17:10:39 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int check_sides_collision(t_snake *snake_head)
 	return (0);
 }
 
-static void no_sides(t_snake *snake)
+void no_sides(t_snake *snake)
 {
 	snake->cur_pos.x = snake->cur_pos.x >= WIDTH ? 0 : snake->cur_pos.x;
 	snake->cur_pos.x = snake->cur_pos.x < 0 ? (WIDTH - GRID) : snake->cur_pos.x;
@@ -79,16 +79,16 @@ void	move_snake_body(t_snake *body, t_point new_pos)
 	body->cur_pos = new_pos;
 }
 
-static void move_snake_head(t_mlx *mlx, t_snake *snake, int player)
+void	move_snake_head(t_snake *snake, int move)
 {
 	snake->old_pos = snake->cur_pos;
-	if (KEYCONF[player]->move == KEY_RIGHT || KEYCONF[player]->move == KEY_D)
+	if (move == KEY_RIGHT || move == KEY_D)
 		snake->cur_pos.x += GRID;
-	else if (KEYCONF[player]->move == KEY_LEFT || KEYCONF[player]->move == KEY_A)
+	else if (move == KEY_LEFT || move == KEY_A)
 		snake->cur_pos.x -= GRID;
-	else if (KEYCONF[player]->move == KEY_UP || KEYCONF[player]->move == KEY_W)
+	else if (move == KEY_UP || move == KEY_W)
 		snake->cur_pos.y -= GRID;
-	else if (KEYCONF[player]->move == KEY_DOWN || KEYCONF[player]->move == KEY_S)
+	else if (move == KEY_DOWN || move == KEY_S)
 		snake->cur_pos.y += GRID;	
 }
 
@@ -108,7 +108,7 @@ void	move_snake(t_mlx *mlx, int player)
 	t_snake *snake;
 
 	snake = SNAKEHEAD[player];
-	move_snake_head(mlx, snake, player);
+	move_snake_head(snake, KEYCONF[player]->move);
 	if (GAME->players == 2 && check_collision_player(mlx, player)) /* HEAD-ON COLLISION LOOKS WIERD */
 		game_over(mlx, player);
 	if (GAME->map == KEY_1)

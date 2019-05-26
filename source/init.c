@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/25 18:13:03 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/26 16:04:19 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void init_snake(t_mlx *mlx)
 	int i;
 	int player;
 
-	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake*) * (GAME->players + 1));
+	SNAKEHEAD = (t_snake**)malloc(sizeof(t_snake*) * GAME->players);
 	player = 0;
 	while (player < GAME->players)
 	{
@@ -32,12 +32,11 @@ void init_snake(t_mlx *mlx)
 		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
 		while (i < 5)
 		{
-			add_snake_body(mlx, player);
+			add_snake_body(SNAKEHEAD[player]);
 			i++;
 		}
 		player++;
 	}
-	SNAKEHEAD[player] = NULL;
 }
 
 void init_keyconf(t_mlx *mlx)
@@ -77,7 +76,7 @@ static void init_game(t_mlx *mlx)
 	GAME = MEM(t_game);
 	GAME->map = KEY_1;
 	GAME->menu = 1;
-	GAME->colour = (t_colour){0x45, 0x53, 0x31};
+	GAME->menu_colour = (t_colour){0x45, 0x53, 0x31};
 }
 
 void	setup_game(t_mlx *mlx)

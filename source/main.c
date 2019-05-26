@@ -15,6 +15,7 @@
 
 int		main(int argc, char **argv)
 {
+
 	system("clear");
 	ft_putendl("\
 ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗\n\
