@@ -6,24 +6,12 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/27 00:24:49 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/27 15:01:05 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
 #include <stdlib.h>
-
-/* FOR BOX */
-// if (APPLE->pos.x != SNAKEHEAD[0]->cur_pos.x && /* APPLE BEHIND SNAKEHEAD */
-// ((APPLE->pos.y >= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_UP) ||
-// (APPLE->pos.y <= SNAKEHEAD[0]->cur_pos.y && KEYCONF[0]->move == KEY_DOWN)))
-// if (APPLE->pos.x < SNAKEHEAD[0]->cur_pos.x)
-// {
-//	ft_putendl("TURN LEFT");
-// }
-// else if (APPLE->pos.x > SNAKEHEAD[0]->cur_pos.x)
-// 	ft_putendl("TURN RIGHT");
-// }
 
 static int		calc_apple_behind_width(t_mlx *mlx)
 {
@@ -142,12 +130,6 @@ static int check_possibility(t_mlx *mlx, int move) /* WORK IN PROGRESS */
 		free(copied_snake);
 		return (1);
 	}
-	// else if (GAME->map == KEY_3)
-	// {
-	// 	map3_sides(snake);
-	// 	if (check_map3_collision(SNAKEHEAD[player]))
-	// 		game_over(mlx, player);
-	// }
 	while (tmp_cp->next)
 	{
 		move_snake_body(tmp_cp->next, tmp_cp->old_pos);
@@ -240,11 +222,12 @@ void	check_ai(t_mlx *mlx, int *move)
 
 }
 
-/* FUNCTION CHECK BOX? FUNCTION CHECK 1 MOVE A HEAD (AGAINST STAIR LOCK)
-** CHECK_POSSIBILITY RECURSIVE????
+/* 
+** FUNCTION CHECK RIGHT/LEFT/STRAIGHT = FREE? HOW FAR IS FREE (IF HITS BODY CALC HOW FAR AWAY THE TAIL IS VS DISTANCE BEFORE HITTING)
+** FUNCTION WHERE IS APPLE
 */
 
-void	ai_snake(t_mlx *mlx)
+void	ai_snake(t_mlx *mlx) /* LOOKS COOL AND FASTER BUT LESS EFFECTIVE */
 {
 	int move;
 
@@ -260,36 +243,7 @@ void	ai_snake(t_mlx *mlx)
 	KEYCONF[0]->move = move;
 }
 
-void	ai_snake1(t_mlx *mlx)
-{
-	int move;
-
-	move = KEYCONF[0]->move;
-	if (GAME->map == KEY_1)
-		ai_map1(mlx, &move);
-	else if (GAME->map == KEY_2)
-		ai_map2(mlx, &move);
-	check_ai(mlx, &move);
-	KEYCONF[0]->move = move;
-}
-
-void	ai_snake2(t_mlx *mlx)
-{
-	int move;
-
-	move = KEYCONF[0]->move;
-	if (GAME->map == KEY_1)
-	{
-		// if (!ai_map1(mlx, &move))
-			calc_apple_turn(mlx, &move);
-	}
-	else if (GAME->map == KEY_2)
-		ai_map2(mlx, &move);
-	check_ai(mlx, &move);	
-	KEYCONF[0]->move = move;
-}
-
-void	ai_snake3(t_mlx *mlx)
+void	ai_snake1(t_mlx *mlx) /* SIMPLE BUT MOST EFFECTIVE */
 {
 	int move;
 

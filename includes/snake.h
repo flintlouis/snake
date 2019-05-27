@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/26 23:23:21 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/27 11:17:16 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ typedef	struct			s_mlx
 }						t_mlx;
 
 void 					game_reset(t_mlx *mlx, int key); /* <------ ONLY FOR AUTO RESET*/
-void					check_ai(t_mlx *mlx, int *move); /* ONLY FOR AI3 */
 void					ai_snake1(t_mlx *mlx); /* <------ */
 void					ai_snake2(t_mlx *mlx); /* <------ */
 void					ai_snake3(t_mlx *mlx); /* <------ */
