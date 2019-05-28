@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/28 18:46:58 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/28 18:55:27 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/29 00:11:29 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int     check_sides_collision(t_snake *snake_head)
 	return (0);
 }
 
-int     check_collision_body(t_snake *snake_head, t_snake *body)
+int     check_collision_body(t_point snake_head, t_snake *body)
 {
 	if (!body)
 		return (0);
-	if (snake_head->cur_pos.x == body->cur_pos.x && snake_head->cur_pos.y == body->cur_pos.y)
+	if (snake_head.x == body->cur_pos.x && snake_head.y == body->cur_pos.y)
 		return (1);
 	return (0);
 }
@@ -61,7 +61,7 @@ int     check_collision_player(t_mlx *mlx, int player)
 	opponent_snake = SNAKEHEAD[opponent];
 	while (opponent_snake)
 	{
-		if (check_collision_body(SNAKEHEAD[player], opponent_snake))
+		if (check_collision_body(SNAKEHEAD[player]->cur_pos, opponent_snake))
 			return (1);
 		opponent_snake = opponent_snake->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/28 19:41:56 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/29 00:10:26 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		move_snake(t_mlx *mlx, int player)
 	{
 		move_snake_body(snake->next, snake->old_pos);
 		snake = snake->next;
-		if (check_collision_body(SNAKEHEAD[player], snake))
+		if (check_collision_body(SNAKEHEAD[player]->cur_pos, snake))
 			game_over(mlx, player);
 	}
 	check_apple(mlx, player);

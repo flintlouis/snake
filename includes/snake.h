@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/29 00:00:08 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 00:19:54 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define KEY_R			15
 # define KEY_G			5
 # define KEY_I			34
+# define KEY_ENTER		36
 # define L_MOUSE		1
 # define R_MOUSE		2
 # define WHEEL_FORW		4
@@ -95,6 +96,7 @@ typedef	struct			s_game
 {
 	int					ai; /* <----- */
 	int					gaze; /* <----- */
+	int					pause;
 	int					players;
 	int					map;
 	int					game_over;
@@ -126,7 +128,7 @@ typedef	struct			s_mlx
 int						check_map3_collision(t_snake *snake_head);
 int						check_collision_player(t_mlx *mlx, int player);
 int						check_sides_collision(t_snake *snake_head);
-int 					check_collision_body(t_snake *snake_head, t_snake *body);
+int 					check_collision_body(t_point snake_head, t_snake *body);
 int						mouse_move(int x, int y, t_mlx *mlx);
 int						mouse_press(int button, int x, int y, t_mlx *mlx);
 int						mouse_release(int button, int x, int y, t_mlx *mlx);

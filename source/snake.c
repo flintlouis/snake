@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/28 23:58:30 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 00:22:53 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-void    ai_snake(t_mlx *mlx); /* <----- */
-void			snake_gaze(t_mlx *mlx);/* <----- */
+void    	ai_snake(t_mlx *mlx); /* <----- */
+void		snake_gaze(t_mlx *mlx);/* <----- */
 
 void		add_snake_body(t_snake *snake_head)
 {
@@ -106,7 +106,7 @@ int			start_snake(t_mlx *mlx)
 	else
 	{
 		ms = time_between_frames();
-		if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
+		if (!get_player_info(mlx, ms) && !GAME->pause) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
 			snake(mlx);
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);

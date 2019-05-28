@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/29 00:00:55 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 00:24:30 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,14 @@ int			press_key(int key, t_mlx *mlx)
 				KEYCONF[1]->nitro = 1;
 			}
 		}
-		if (key == KEY_P)
+		if (key == KEY_ENTER)
 			{
 				GAME->menu = 1;
 				GAME->map = KEY_1;
-				game_reset(mlx, KEY_P);
+				game_reset(mlx, KEY_ENTER);
 			}
+		if (key == KEY_P)
+			GAME->pause = (GAME->pause + 1) % 2;	
 	}
 	// printf("%d\n", key);
 	return (0);
