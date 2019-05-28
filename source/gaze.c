@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 00:04:40 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/29 00:18:25 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 00:44:24 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,12 @@ static void		left_right_gaze(t_mlx *mlx)
 	t_snake *tmp;
 	t_colour c;
 
-	tmp = SNAKEHEAD[0];
-	c = (t_colour){255, 255, 255};
 	x = SNAKEHEAD[0]->cur_pos.x;
 	y = SNAKEHEAD[0]->cur_pos.y;
 	while (x < WIDTH)
 	{
+		c = (t_colour){255, 255, 255};
+		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
 		{
 			system("clear");
@@ -153,7 +153,7 @@ static void		left_right_gaze(t_mlx *mlx)
 		while(tmp->next)
 		{
 			tmp = tmp->next;
-			if (check_collision_body((t_point){x, y}, tmp))
+			if (tmp->cur_pos.y == y)
 			{
 				c = (t_colour){255, 0, 0};
 				break ;
@@ -162,12 +162,12 @@ static void		left_right_gaze(t_mlx *mlx)
 		put_pixel(x + 5, y + 5, mlx, c);
 		x += 10;
 	}
-	tmp = SNAKEHEAD[0];
-	c = (t_colour){255, 255, 255};
 	x = SNAKEHEAD[0]->cur_pos.x;
 	y = SNAKEHEAD[0]->cur_pos.y;
+	c = (t_colour){255, 255, 255};
 	while (x > 0)
 	{
+		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
 		{
 			system("clear");
@@ -177,7 +177,7 @@ static void		left_right_gaze(t_mlx *mlx)
 		while(tmp->next)
 		{
 			tmp = tmp->next;
-			if (check_collision_body((t_point){x, y}, tmp))
+			if (tmp->cur_pos.y == y)
 			{
 				c = (t_colour){255, 0, 0};
 				break ;
