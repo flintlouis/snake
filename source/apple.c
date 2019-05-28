@@ -6,13 +6,13 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:08:34 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/26 23:03:11 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/28 18:45:29 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
 
-void place_apple(t_mlx *mlx)
+void	place_apple(t_mlx *mlx)
 {
 	if (!APPLE->on)
 	{
@@ -28,7 +28,7 @@ void place_apple(t_mlx *mlx)
 	APPLE->on = 1;
 }
 
-int check_apple(t_mlx *mlx, int player)
+int		check_apple(t_mlx *mlx, int player)
 {
 	int grow;
 

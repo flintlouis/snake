@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:05:12 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/20 17:43:04 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/28 18:57:18 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void		put_pixel(int x, int y, t_mlx *mlx, t_colour colour)
+static void		put_pixel(int x, int y, t_mlx *mlx, t_colour colour)
 {
 	int i;
 
@@ -29,7 +29,7 @@ void		put_pixel(int x, int y, t_mlx *mlx, t_colour colour)
 	}
 }
 
-void		put_square(t_mlx *mlx, t_point pixel, t_colour colour)
+void			put_square(t_mlx *mlx, t_point pixel, t_colour colour)
 {
 	int i;
 	int j;
@@ -47,7 +47,7 @@ void		put_square(t_mlx *mlx, t_point pixel, t_colour colour)
 	}
 }
 
-t_point		random_pixel(void)
+t_point			random_pixel(void)
 {
 	t_point pixel;
 	int		nb;

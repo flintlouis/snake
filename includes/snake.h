@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/27 15:04:29 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/28 18:58:15 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,12 @@ typedef	struct			s_mlx
 	t_snake				**snake_head;
 }						t_mlx;
 
-void 					game_reset(t_mlx *mlx, int key); /* <------ ONLY FOR AUTO RESET*/
-void					ai_snake1(t_mlx *mlx); /* <------ */
 
+
+int						check_map3_collision(t_snake *snake_head);
+int						check_collision_player(t_mlx *mlx, int player);
 int						check_sides_collision(t_snake *snake_head);
-int 					check_collision(t_snake *snake_head, t_snake *body);
+int 					check_collision_body(t_snake *snake_head, t_snake *body);
 int						mouse_move(int x, int y, t_mlx *mlx);
 int						mouse_press(int button, int x, int y, t_mlx *mlx);
 int						mouse_release(int button, int x, int y, t_mlx *mlx);
@@ -133,23 +134,21 @@ int						release_key(int key, t_mlx *mlx);
 int						press_key(int key, t_mlx *mlx);
 int						start_snake(t_mlx *mlx);
 int						check_apple(t_mlx *mlx, int player);
+void				    game_over(t_mlx *mlx, int player);
+void					game_reset(t_mlx *mlx, int key);
 void					score(t_mlx *mlx);
 void					start_text(t_mlx *mlx);
 void					move_snake_body(t_snake *body, t_point new_pos);
 void					move_snake_head(t_snake *snake, int move);
-void					no_sides(t_snake *snake);
 void					delete_snake(t_snake *snake);
 void					calc_apple_turn(t_mlx *mlx, int *move);
 void					turn_left(int *move);
 void					turn_right(int *move);
-void					ai_snake(t_mlx *mlx);
-void					draw_snake(t_mlx *mlx, int player);
 void					move_snake(t_mlx *mlx, int player);
 void					place_apple(t_mlx *mlx);
 void					background(t_mlx *mlx);
 void					init_keyconf(t_mlx *mlx);
 void					add_snake_body(t_snake *snake_head);
-void					put_pixel(int x, int y, t_mlx *mlx, t_colour colour);
 void					setup_snake(void);
 void					put_square(t_mlx *mlx, t_point pixel, t_colour colour);
 void					init_snake(t_mlx *mlx);

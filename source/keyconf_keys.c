@@ -6,51 +6,27 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/26 22:34:11 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/28 18:43:31 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
 #include <stdlib.h>
 
+static void	update_movement(int key, t_mlx *mlx, int player)
+{
+	if (KEYCONF[player]->updated)
+	{
+		KEYCONF[player]->move = key;
+		KEYCONF[player]->updated = 0;
+	}
+}
+
 int			close_window(void *ptr)
 {
 	(void)ptr;
 	exit(0);
 	return (0);
-}
-
-void	delete_snake(t_snake *snake)
-{
-	if (!snake)
-		return ;
-	delete_snake(snake->next);
-	free(snake);
-	snake = NULL;
-}
-
-void game_reset(t_mlx *mlx, int key)
-{
-	int i;
-	int player;
-
-	i = 0;
-	player = 0;
-	system("clear");
-	while (player < GAME->players)
-	{
-		delete_snake(SNAKEHEAD[player]);
-		free(KEYCONF[player]);
-		KEYCONF[player] = NULL;
-		player++;
-	}
-	free(SNAKEHEAD);
-	free(KEYCONF);
-	if (key == KEY_R)
-		setup_game(mlx);
-	APPLE->on = 0;
-	GAME->game_over = 0;
-	GAME->start_text = 0;
 }
 
 int			release_key(int key, t_mlx *mlx)
@@ -106,15 +82,6 @@ int			release_key(int key, t_mlx *mlx)
 		}
 	}
 	return (0);
-}
-
-static void	update_movement(int key, t_mlx *mlx, int player)
-{
-	if (KEYCONF[player]->updated)
-	{
-		KEYCONF[player]->move = key;
-		KEYCONF[player]->updated = 0;
-	}
 }
 
 int			press_key(int key, t_mlx *mlx)

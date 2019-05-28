@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/27 12:16:29 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/28 18:51:09 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,62 @@
 #include <time.h>
 #include <stdlib.h>
 
-void init_snake(t_mlx *mlx)
+static t_mlx	*init_mlx(void)
+{
+	t_mlx *mlx;
+
+	mlx = MEM(t_mlx);
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "snake");
+	mlx->image = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
+	(mlx->data_addr = mlx_get_data_addr(mlx->image, &(mlx->bits_per_pixel),
+	&(mlx->size_line), &(mlx->endian)));
+	return (mlx);
+}
+
+static void		init_game(t_mlx *mlx)
+{
+	GAME = MEM(t_game);
+	GAME->map = KEY_1;
+	GAME->players = 1;
+	GAME->menu = 1;
+	GAME->menu_colour = (t_colour){0x45, 0x53, 0x31};
+}
+
+void			game_reset(t_mlx *mlx, int key)
+{
+	int i;
+	int player;
+
+	i = 0;
+	player = 0;
+	system("clear");
+	while (player < GAME->players)
+	{
+		delete_snake(SNAKEHEAD[player]);
+		free(KEYCONF[player]);
+		KEYCONF[player] = NULL;
+		player++;
+	}
+	free(SNAKEHEAD);
+	free(KEYCONF);
+	if (key == KEY_R)
+		setup_game(mlx);
+	APPLE->on = 0;
+	GAME->game_over = 0;
+	GAME->start_text = 0;
+}
+
+void			delete_snake(t_snake *snake)
+{
+	if (!snake)
+		return ;
+	delete_snake(snake->next);
+	free(snake);
+	snake = NULL;
+}
+
+void			init_snake(t_mlx *mlx)
 {
 	int i;
 	int player;
@@ -39,7 +94,7 @@ void init_snake(t_mlx *mlx)
 	}
 }
 
-void init_keyconf(t_mlx *mlx)
+void			init_keyconf(t_mlx *mlx)
 {
 	int player;
 
@@ -52,42 +107,20 @@ void init_keyconf(t_mlx *mlx)
 			KEYCONF[player]->move = KEY_RIGHT;
 		else
 			KEYCONF[player]->move = KEY_D;
-		KEYCONF[player]->speed = 0;//30;//100; /* <----- */
+		KEYCONF[player]->speed = 100;
 		KEYCONF[player]->updated = 1;
 		player++;
 	}
 }
 
-static t_mlx *init_mlx(void)
-{
-	t_mlx *mlx;
-
-	mlx = MEM(t_mlx);
-	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "snake");
-	mlx->image = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
-	(mlx->data_addr = mlx_get_data_addr(mlx->image, &(mlx->bits_per_pixel),
-	&(mlx->size_line), &(mlx->endian)));
-	return (mlx);
-}
-
-static void init_game(t_mlx *mlx)
-{
-	GAME = MEM(t_game);
-	GAME->map = KEY_1;
-	GAME->menu = 1;
-	GAME->ai = 1; /* <----- */
-	GAME->menu_colour = (t_colour){0x45, 0x53, 0x31};
-}
-
-void	setup_game(t_mlx *mlx)
+void			setup_game(t_mlx *mlx)
 {
 	system("clear");
 	init_keyconf(mlx);
 	init_snake(mlx);
 }
 
-void setup_snake(void)
+void			setup_snake(void)
 {
 	t_mlx *mlx;
 

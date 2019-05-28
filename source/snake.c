@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/27 15:02:53 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/28 19:02:02 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void	add_snake_body(t_snake *snake_head)
+void		add_snake_body(t_snake *snake_head)
 {
 	t_snake *snake_body;
 
@@ -27,7 +27,7 @@ void	add_snake_body(t_snake *snake_head)
 	snake_body->next->old_pos = snake_body->old_pos;
 }
 
-void	draw_snake(t_mlx *mlx, int player)
+static void	draw_snake(t_mlx *mlx, int player)
 {
 	t_snake *snake;
 	t_colour colour[3];
@@ -69,9 +69,8 @@ static void snake(t_mlx* mlx)
 		draw_snake(mlx, player);
 		if (KEYCONF[player]->ms >= KEYCONF[player]->speed)
 		{
-			if (GAME->ai)
-				// ai_snake(mlx); /* AI WORK IN PROGRESS */
-				ai_snake1(mlx); /* AI WORK IN PROGRESS */
+			// if (GAME->ai)
+			// 	ai_snake(mlx); /* AI WORK IN PROGRESS */
 			move_snake(mlx, player);
 			KEYCONF[player]->ms = 0;
 			KEYCONF[player]->updated = 1;
@@ -98,17 +97,12 @@ int			start_snake(t_mlx *mlx)
 	long	ms;
 	
 	if (GAME->menu)
-	{
-		ms = 0;
 		menu(mlx);
-	}
 	else
 	{
 		ms = time_between_frames();
 		if (!get_player_info(mlx, ms)) /* CHECK TO SEE IF NO PLAYER IS GAMEOVER AND GET THE SPEED */
 			snake(mlx);
-		else /* <------- */
-			game_reset(mlx, KEY_R); /* <------ */
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 	if (GAME->menu)

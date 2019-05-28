@@ -6,21 +6,13 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/10 17:20:34 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/20 13:45:48 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/28 19:02:54 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <time.h>
 
-void	ft_wait(int sec, long nsec)
-{
-	struct timespec tim, tim2;
-	tim.tv_sec = sec;
-	tim.tv_nsec = nsec;
-	nanosleep(&tim, &tim2);
-}
-
-static long    ft_milsec(void)
+static long     ft_milsec(void)
 {
     long				ns;
     time_t				s;
@@ -32,7 +24,7 @@ static long    ft_milsec(void)
     return (s * 1000 + ns / 1000000);
 }
 
-long	time_between_frames(void)
+long            time_between_frames(void)
 {
 	static long ph_ms;
 	long dms;

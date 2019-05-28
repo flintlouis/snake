@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/20 17:42:43 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/21 13:27:23 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/28 18:46:02 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	map3(t_mlx *mlx)
 	}
 }
 
-void	background(t_mlx *mlx)
+void		background(t_mlx *mlx)
 {
 	if (GAME->map == KEY_1)
 		map1(mlx);
