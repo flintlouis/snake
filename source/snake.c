@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/28 19:02:02 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/28 19:48:32 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+
+void    ai_snake(t_mlx *mlx); /* <----- */
 
 void		add_snake_body(t_snake *snake_head)
 {
@@ -69,8 +71,8 @@ static void snake(t_mlx* mlx)
 		draw_snake(mlx, player);
 		if (KEYCONF[player]->ms >= KEYCONF[player]->speed)
 		{
-			// if (GAME->ai)
-			// 	ai_snake(mlx); /* AI WORK IN PROGRESS */
+			if (GAME->ai)
+				ai_snake(mlx); /* AI WORK IN PROGRESS */
 			move_snake(mlx, player);
 			KEYCONF[player]->ms = 0;
 			KEYCONF[player]->updated = 1;
