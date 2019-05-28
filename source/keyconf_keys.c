@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/28 18:43:31 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/29 00:00:55 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ int			press_key(int key, t_mlx *mlx)
 
 	if (key == KEY_ESC)
 		close_window(NULL);
-	if (key == KEY_G)
+	if (key == KEY_I)
 	{
 		char *ai[2] = {"off", "on"};
 		GAME->ai = (GAME->ai + 1) % 2;
 		printf("AI is %s\n", ai[GAME->ai]);
 	}
+	if (key == KEY_G)
+		GAME->gaze = (GAME->gaze + 1) % 2;
 	if (GAME->menu)
 	{
 		if (key == KEY_1 && !GAME->p2)

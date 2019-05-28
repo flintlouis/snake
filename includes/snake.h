@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/28 18:58:15 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/29 00:00:08 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "mlx.h"
 # include "libft.h"
 
-#include <stdio.h>		///
+#include <stdio.h>		/* <----- */
 
 # define GRID			10
 # define HEIGHT			400
@@ -43,7 +43,7 @@
 # define KEY_MIN		27
 # define KEY_R			15
 # define KEY_G			5
-# define KEY_B			11
+# define KEY_I			34
 # define L_MOUSE		1
 # define R_MOUSE		2
 # define WHEEL_FORW		4
@@ -93,7 +93,8 @@ typedef	struct			s_keyconf
 
 typedef	struct			s_game
 {
-	int					ai;
+	int					ai; /* <----- */
+	int					gaze; /* <----- */
 	int					players;
 	int					map;
 	int					game_over;
