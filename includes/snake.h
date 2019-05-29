@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/29 14:36:59 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/29 22:42:01 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int						release_key(int key, t_mlx *mlx);
 int						press_key(int key, t_mlx *mlx);
 int						start_snake(t_mlx *mlx);
 int						check_apple(t_mlx *mlx, int player);
+void					put_pixel(int x, int y, t_mlx *mlx, t_colour colour);
 void				    game_over(t_mlx *mlx, int player);
 void					game_reset(t_mlx *mlx, int key);
 void					score(t_mlx *mlx);
