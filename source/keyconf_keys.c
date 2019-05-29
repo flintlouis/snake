@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 14:18:18 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/29 00:24:30 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 14:37:16 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int			press_key(int key, t_mlx *mlx)
 		printf("AI is %s\n", ai[GAME->ai]);
 	}
 	if (key == KEY_G)
-		GAME->gaze = (GAME->gaze + 1) % 2;
+		GAME->vision = (GAME->vision + 1) % 2;
 	if (GAME->menu)
 	{
 		if (key == KEY_1 && !GAME->p2)

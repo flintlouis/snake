@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 16:59:59 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/29 00:44:43 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 13:36:49 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			init_snake(t_mlx *mlx)
 		else
 			SNAKEHEAD[player]->cur_pos = (t_point){WIDTH / 4 + (WIDTH / 2 * player), HEIGHT / 2 - GRID};
 		SNAKEHEAD[player]->old_pos = SNAKEHEAD[player]->cur_pos;
-		while (i < 25)//5) /* <---- */
+		while (i < 5) /* <---- */
 		{
 			add_snake_body(SNAKEHEAD[player]);
 			i++;

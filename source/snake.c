@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/29 00:37:48 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 14:38:32 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <time.h>
 
 void    	ai_snake(t_mlx *mlx); /* <----- */
-void		snake_gaze(t_mlx *mlx);/* <----- */
+void		snake_vision(t_mlx *mlx);/* <----- */
 
 void		add_snake_body(t_snake *snake_head)
 {
@@ -69,6 +69,8 @@ static void snake(t_mlx* mlx)
 	place_apple(mlx);
 	while (player < GAME->players)
 	{
+		if (GAME->vision)
+			snake_vision(mlx); /* <------ */
 		draw_snake(mlx, player);
 		if (KEYCONF[player]->ms >= KEYCONF[player]->speed)
 		{
@@ -80,8 +82,6 @@ static void snake(t_mlx* mlx)
 		}
 		player++;
 	}
-	if (GAME->gaze)
-		snake_gaze(mlx); /* <------ */
 }
 
 static int get_player_info(t_mlx *mlx, long ms)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   gaze.c                                             :+:    :+:            */
+/*   vision.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/29 00:04:40 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/29 00:57:33 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 16:15:37 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,22 @@
 
 void			put_pixel(int x, int y, t_mlx *mlx, t_colour colour); /* <----- */
 
-static void		bottomleft_topright_gaze(t_mlx *mlx)
+static int		count_tail(t_snake *snake)
+{
+	int tail;
+	t_snake *tmp;
+
+	tail = 0;
+	tmp = snake;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+		tail++;
+	}
+	return (tail);
+}
+
+static void		bottomleft_topright_vision(t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -29,12 +44,7 @@ static void		bottomleft_topright_gaze(t_mlx *mlx)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n",
-			(((ABS(APPLE->pos.x - SNAKEHEAD[0]->cur_pos.x)) + ABS(APPLE->pos.y - SNAKEHEAD[0]->cur_pos.y))) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -55,12 +65,7 @@ static void		bottomleft_topright_gaze(t_mlx *mlx)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n",
-			(((ABS(APPLE->pos.x - SNAKEHEAD[0]->cur_pos.x)) + ABS(APPLE->pos.y - SNAKEHEAD[0]->cur_pos.y))) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -76,7 +81,7 @@ static void		bottomleft_topright_gaze(t_mlx *mlx)
 	}
 }
 
-static void		topleft_bottomright_gaze(t_mlx *mlx)
+static void		topleft_bottomright_vision(t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -90,12 +95,7 @@ static void		topleft_bottomright_gaze(t_mlx *mlx)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n",
-			(((ABS(APPLE->pos.x - SNAKEHEAD[0]->cur_pos.x)) + ABS(APPLE->pos.y - SNAKEHEAD[0]->cur_pos.y))) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -116,12 +116,7 @@ static void		topleft_bottomright_gaze(t_mlx *mlx)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n",
-			(((ABS(APPLE->pos.x - SNAKEHEAD[0]->cur_pos.x)) + ABS(APPLE->pos.y - SNAKEHEAD[0]->cur_pos.y))) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -137,7 +132,7 @@ static void		topleft_bottomright_gaze(t_mlx *mlx)
 	}
 }
 
-static void		up_down_gaze(t_mlx *mlx)
+static void		up_down_vision(t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -147,15 +142,12 @@ static void		up_down_gaze(t_mlx *mlx)
 	c = (t_colour){255, 255, 255};
 	x = SNAKEHEAD[0]->cur_pos.x;
 	y = SNAKEHEAD[0]->cur_pos.y;
+	/* DOWN */
 	while (y < HEIGHT)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n", (APPLE->pos.y - SNAKEHEAD[0]->cur_pos.y) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -171,15 +163,12 @@ static void		up_down_gaze(t_mlx *mlx)
 	c = (t_colour){255, 255, 255};
 	x = SNAKEHEAD[0]->cur_pos.x;
 	y = SNAKEHEAD[0]->cur_pos.y;
+	/* UP */
 	while (y > 0)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n", (ABS(APPLE->pos.y - SNAKEHEAD[0]->cur_pos.y)) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -194,7 +183,7 @@ static void		up_down_gaze(t_mlx *mlx)
 	}
 }
 
-static void		left_right_gaze(t_mlx *mlx)
+static void		left_right_vision(t_mlx *mlx)
 {
 	int x;
 	int y;
@@ -209,11 +198,7 @@ static void		left_right_gaze(t_mlx *mlx)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n", (APPLE->pos.x - SNAKEHEAD[0]->cur_pos.x) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -234,11 +219,7 @@ static void		left_right_gaze(t_mlx *mlx)
 	{
 		tmp = SNAKEHEAD[0];
 		if (APPLE->pos.x == x && APPLE->pos.y == y)
-		{
-			system("clear");
-			printf("Distance to apple %d moves\n", (ABS(APPLE->pos.x - SNAKEHEAD[0]->cur_pos.x)) / 10);
 			c = (t_colour){0, 0, 0};
-		}
 		while(tmp->next)
 		{
 			tmp = tmp->next;
@@ -253,10 +234,10 @@ static void		left_right_gaze(t_mlx *mlx)
 	}
 }
 
-void			snake_gaze(t_mlx *mlx)
+void			snake_vision(t_mlx *mlx)
 {
-	up_down_gaze(mlx);
-	left_right_gaze(mlx);
-	topleft_bottomright_gaze(mlx);
-	bottomleft_topright_gaze(mlx);
+	up_down_vision(mlx);
+	left_right_vision(mlx);
+	topleft_bottomright_vision(mlx);
+	bottomleft_topright_vision(mlx);
 }

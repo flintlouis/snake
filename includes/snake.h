@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/29 00:19:54 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/29 14:36:59 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct			s_snake
 {
 	t_point				cur_pos;
 	t_point				old_pos;
-	struct s_snake		*next;	
+	struct s_snake		*next;
 }						t_snake;
 
 typedef struct			s_colour
@@ -95,7 +95,7 @@ typedef	struct			s_keyconf
 typedef	struct			s_game
 {
 	int					ai; /* <----- */
-	int					gaze; /* <----- */
+	int					vision; /* <----- */
 	int					pause;
 	int					players;
 	int					map;
