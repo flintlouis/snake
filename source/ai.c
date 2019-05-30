@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/30 17:56:44 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/30 19:19:55 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,29 +226,65 @@ static int		check_move(t_mlx *mlx, int move)
 	return (0);
 }
 
+static int		check_straight(t_mlx *mlx)
+{
+	int distance;
+
+	if (KEYCONF[0]->move == KEY_UP)
+	{
+		if (!(distance = check_body_up(mlx)))
+			distance = SNAKEHEAD[0]->cur_pos.y;
+		return (distance);
+	}
+	else if (KEYCONF[0]->move == KEY_DOWN)
+	{
+		if (!(distance = check_body_down(mlx)))
+			distance = HEIGHT - SNAKEHEAD[0]->cur_pos.y - GRID;
+		return (distance);
+	}
+	else if (KEYCONF[0]->move == KEY_LEFT)
+	{
+		if (!(distance = check_body_left(mlx)))
+			distance = SNAKEHEAD[0]->cur_pos.x;
+		return (distance);
+	}
+	else
+	{
+		if (!(distance = check_body_right(mlx)))
+			distance = WIDTH - SNAKEHEAD[0]->cur_pos.x - GRID;
+		return (distance);
+	}
+}
+
 static void		make_new_move(t_mlx *mlx, int *move)
 {
 	int distance1;
 	int distance2;
+	int straight;
 
+	straight = check_straight(mlx);
 	if (KEYCONF[0]->move == KEY_UP || KEYCONF[0]->move == KEY_DOWN)
 	{
 		if (!(distance1 = check_body_left(mlx)))
 			distance1 = SNAKEHEAD[0]->cur_pos.x;
 		if (!(distance2 = check_body_right(mlx)))
-			distance2 = WIDTH - SNAKEHEAD[0]->cur_pos.x;
-		if (distance1 >= distance2)
+			distance2 = WIDTH - SNAKEHEAD[0]->cur_pos.x - GRID;
+		if (straight >= distance1 && straight >= distance2)
+			*move = KEYCONF[0]->move;
+		else if (distance1 >= distance2)
 			*move = KEY_LEFT;
 		else
-			*move = KEY_RIGHT;
+			*move = KEY_RIGHT;	
 	}
 	else if (KEYCONF[0]->move == KEY_LEFT || KEYCONF[0]->move == KEY_RIGHT)
 	{
 		if (!(distance1 = check_body_up(mlx)))
 			distance1 = SNAKEHEAD[0]->cur_pos.y;
 		if (!(distance2 = check_body_down(mlx)))
-			distance2 = HEIGHT - SNAKEHEAD[0]->cur_pos.y;
-		if (distance1 >= distance2)
+			distance2 = HEIGHT - SNAKEHEAD[0]->cur_pos.y - GRID;
+		if (straight >= distance1 && straight >= distance2)
+			*move = KEYCONF[0]->move;
+		else if (distance1 >= distance2)
 			*move = KEY_UP;
 		else
 			*move = KEY_DOWN;
@@ -264,12 +300,10 @@ void    		ai_snake(t_mlx *mlx)
         turn_left(&move);
     else if (check_apple_right(mlx))
         turn_right(&move);
-	else if (check_apple_back(mlx, &move));
+    else if (check_apple_back(mlx, &move));
 	else
 		check_apple_side(mlx, &move);
 	if (check_move(mlx, move))
 		make_new_move(mlx, &move);
-	if (check_box(mlx))
-		ft_putendl("BOX!");
 	KEYCONF[0]->move = move;
 }
