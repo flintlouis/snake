@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/06 11:45:51 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/26 17:06:59 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/30 16:47:10 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int				mouse_move(int x, int y, t_mlx *mlx)
 		GAME->p1 = 0;
 		GAME->p2 = 0;
 	}
+	GAME->mouse.x = x; /* <----- */
+	GAME->mouse.y = y; /* <----- */
 	return (0);
 }
 

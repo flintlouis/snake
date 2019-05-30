@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/29 22:42:01 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/30 16:47:28 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ typedef	struct			s_keyconf
 
 typedef	struct			s_game
 {
-	int					ai; /* <----- */
-	int					vision; /* <----- */
+	int					ai;
+	int					vision;
 	int					pause;
 	int					players;
 	int					map;
@@ -105,6 +105,7 @@ typedef	struct			s_game
 	int					p2;
 	long				start_text;
 	t_colour			menu_colour;
+	t_point				mouse; /* <----- */
 
 }						t_game;
 

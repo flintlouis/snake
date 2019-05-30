@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/28 18:36:08 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/29 22:36:18 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/30 16:48:13 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static t_snake **copy_snake(t_mlx *mlx)
 	}
 	return(copy_snake);
 }
-
 
 static int ai_map1(t_mlx *mlx, int *move)
 {
@@ -147,11 +146,6 @@ void	check_ai(t_mlx *mlx, int *move)
 	}
 
 }
-
-/* 
-** FUNCTION CHECK RIGHT/LEFT/STRAIGHT = FREE? HOW FAR IS FREE (IF HITS BODY CALC HOW FAR AWAY THE TAIL IS VS DISTANCE BEFORE HITTING)
-** FUNCTION WHERE IS APPLE
-*/
 
 void	ai_snake(t_mlx *mlx) /* LOOKS COOL AND FASTER BUT LESS EFFECTIVE */
 {
