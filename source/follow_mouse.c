@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/28 18:36:08 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/30 20:59:59 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/30 23:39:49 by FlintLouis    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,29 @@ static void		check_apple_side(t_mlx *mlx, int *move)
 {
 	int x = SNAKEHEAD[0]->cur_pos.x;
 	int y = SNAKEHEAD[0]->cur_pos.y;
+	int xdistance = ABS(x - GAME->mouse.x);
+	int ydistance = ABS(y - GAME->mouse.y);
 
-	if (KEYCONF[0]->move == KEY_LEFT || KEYCONF[0]->move == KEY_RIGHT)
+	if (KEYCONF[0]->move == KEY_DOWN || KEYCONF[0]->move == KEY_UP)
 	{
-		if (GAME->mouse.y < y)
-			*move = KEY_UP;
-		else if (GAME->mouse.y > y)
-			*move = KEY_DOWN;
+		if (xdistance >= ydistance)
+		{
+			if (GAME->mouse.x > x)
+				*move = KEY_RIGHT;
+			else if (GAME->mouse.x < x)
+				*move = KEY_LEFT;
+		}
 	}
-	else if (KEYCONF[0]->move == KEY_DOWN || KEYCONF[0]->move == KEY_UP)
+	else if (KEYCONF[0]->move == KEY_LEFT || KEYCONF[0]->move == KEY_RIGHT)
 	{
-		if (GAME->mouse.x < x)
-			*move = KEY_LEFT;
-		else if (GAME->mouse.x > x)
-			*move = KEY_RIGHT;
+		if (ydistance >= xdistance)
+		{
+			if (GAME->mouse.y < y)
+				*move = KEY_UP;
+			else if (GAME->mouse.y > y)
+				*move = KEY_DOWN;
+		}
 	}
-
 }
 
 static int		check_apple_back(t_mlx *mlx, int *move)
