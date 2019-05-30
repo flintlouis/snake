@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/09 22:17:52 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/29 00:10:26 by FlintLouis    ########   odam.nl         */
+/*   Updated: 2019/05/30 16:59:31 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void map3_sides(t_snake *snake)
 	snake->cur_pos.y = snake->cur_pos.y >= HEIGHT && (snake->cur_pos.x >= 250 && snake->cur_pos.x <= 330) ? 0 : snake->cur_pos.y;
 }
 
-static void no_sides(t_snake *snake)
+void 		no_sides(t_snake *snake)
 {
 	snake->cur_pos.x = snake->cur_pos.x >= WIDTH ? 0 : snake->cur_pos.x;
 	snake->cur_pos.x = snake->cur_pos.x < 0 ? (WIDTH - GRID) : snake->cur_pos.x;

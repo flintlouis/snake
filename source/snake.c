@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/08 17:09:56 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/30 16:03:57 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/30 17:01:29 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 void    	ai_snake(t_mlx *mlx); /* <----- */
 void		snake_vision(t_mlx *mlx);/* <----- */
+void		follow_mouse(t_mlx *mlx); /* <----- */
 
 void		add_snake_body(t_snake *snake_head)
 {
@@ -76,6 +77,8 @@ static void snake(t_mlx* mlx)
 		{
 			if (GAME->ai)
 				ai_snake(mlx); /* AI WORK IN PROGRESS */
+			else if (GAME->follow)
+				follow_mouse(mlx);
 			move_snake(mlx, player);
 			KEYCONF[player]->ms = 0;
 			KEYCONF[player]->updated = 1;

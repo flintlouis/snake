@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/06 11:45:51 by fhignett       #+#    #+#                */
-/*   Updated: 2019/05/30 16:47:10 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/30 17:03:06 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int				mouse_release(int button, int x, int y, t_mlx *mlx)
 			setup_game(mlx);
 		}
 	}
+	if (button == 3)
+		GAME->follow = (GAME->follow + 1) % 2;
 	return (0);
 }

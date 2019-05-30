@@ -6,7 +6,7 @@
 /*   By: fhignett <fhignett@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/22 12:03:10 by nvreeke        #+#    #+#                */
-/*   Updated: 2019/05/30 16:47:28 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/30 17:01:51 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef	struct			s_game
 	long				start_text;
 	t_colour			menu_colour;
 	t_point				mouse; /* <----- */
+	int					follow; /* <----- */
 
 }						t_game;
 
