@@ -6,12 +6,74 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/30 16:59:24 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/30 17:56:44 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "snake.h"
 #include <stdlib.h>
+
+static void		check_apple_side(t_mlx *mlx, int *move)
+{
+	int x = SNAKEHEAD[0]->cur_pos.x;
+	int y = SNAKEHEAD[0]->cur_pos.y;
+
+	if (KEYCONF[0]->move == KEY_LEFT || KEYCONF[0]->move == KEY_RIGHT)
+	{
+		if (APPLE->pos.y < y)
+			*move = KEY_UP;
+		else if (APPLE->pos.y > y)
+			*move = KEY_DOWN;
+	}
+	else if (KEYCONF[0]->move == KEY_DOWN || KEYCONF[0]->move == KEY_UP)
+	{
+		if (APPLE->pos.x < x)
+			*move = KEY_LEFT;
+		else if (APPLE->pos.x > x)
+			*move = KEY_RIGHT;
+	}
+
+}
+
+static int		check_apple_back(t_mlx *mlx, int *move)
+{
+	int x = SNAKEHEAD[0]->cur_pos.x;
+	int y = SNAKEHEAD[0]->cur_pos.y;
+
+	if (KEYCONF[0]->move == KEY_LEFT && APPLE->pos.x > x)
+	{
+		if (APPLE->pos.y < y)
+			turn_right(move);
+		else
+			turn_left(move);
+		return (1);
+	}
+	else if (KEYCONF[0]->move == KEY_RIGHT && APPLE->pos.x < x)
+	{
+		if (APPLE->pos.y < y)
+			turn_left(move);
+		else
+			turn_right(move);
+		return (1);
+	}
+	else if (KEYCONF[0]->move == KEY_UP && APPLE->pos.y > y)
+	{
+		if (APPLE->pos.x < x)
+			turn_left(move);
+		else
+			turn_right(move);
+		return (1);
+	}
+	else if (KEYCONF[0]->move == KEY_DOWN && APPLE->pos.y < y)
+	{
+		if (APPLE->pos.x < x)
+			turn_right(move);
+		else
+			turn_left(move);
+		return (1);
+	}
+	return (0);
+}
 
 static int		count_tail(t_snake *snake)
 {
@@ -166,44 +228,45 @@ static int		check_move(t_mlx *mlx, int move)
 
 static void		make_new_move(t_mlx *mlx, int *move)
 {
-	int i;
-	int j;
+	int distance1;
+	int distance2;
 
 	if (KEYCONF[0]->move == KEY_UP || KEYCONF[0]->move == KEY_DOWN)
 	{
-		if (!(i = check_body_left(mlx)))
-			i = SNAKEHEAD[0]->cur_pos.x;
-		if (!(j = check_body_right(mlx)))
-			j = WIDTH - SNAKEHEAD[0]->cur_pos.x;
-		if (i >= j)
+		if (!(distance1 = check_body_left(mlx)))
+			distance1 = SNAKEHEAD[0]->cur_pos.x;
+		if (!(distance2 = check_body_right(mlx)))
+			distance2 = WIDTH - SNAKEHEAD[0]->cur_pos.x;
+		if (distance1 >= distance2)
 			*move = KEY_LEFT;
 		else
 			*move = KEY_RIGHT;
 	}
 	else if (KEYCONF[0]->move == KEY_LEFT || KEYCONF[0]->move == KEY_RIGHT)
 	{
-		if (!(i = check_body_up(mlx)))
-			i = SNAKEHEAD[0]->cur_pos.y;
-		if (!(j = check_body_down(mlx)))
-			j = HEIGHT - SNAKEHEAD[0]->cur_pos.y;
-		if (i >= j)
+		if (!(distance1 = check_body_up(mlx)))
+			distance1 = SNAKEHEAD[0]->cur_pos.y;
+		if (!(distance2 = check_body_down(mlx)))
+			distance2 = HEIGHT - SNAKEHEAD[0]->cur_pos.y;
+		if (distance1 >= distance2)
 			*move = KEY_UP;
 		else
 			*move = KEY_DOWN;
-
 	}
 }
 
 void    		ai_snake(t_mlx *mlx)
 {
 	int move;
-	
-	system("clear");
+
 	move = KEYCONF[0]->move;
     if (check_apple_left(mlx))
         turn_left(&move);
     else if (check_apple_right(mlx))
         turn_right(&move);
+	else if (check_apple_back(mlx, &move));
+	else
+		check_apple_side(mlx, &move);
 	if (check_move(mlx, move))
 		make_new_move(mlx, &move);
 	if (check_box(mlx))
