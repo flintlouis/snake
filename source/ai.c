@@ -6,7 +6,7 @@
 /*   By: FlintLouis <FlintLouis@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/25 15:01:29 by FlintLouis     #+#    #+#                */
-/*   Updated: 2019/05/30 19:22:48 by fhignett      ########   odam.nl         */
+/*   Updated: 2019/05/31 12:25:46 by fhignett      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,29 @@ static void		check_apple_side(t_mlx *mlx, int *move)
 {
 	int x = SNAKEHEAD[0]->cur_pos.x;
 	int y = SNAKEHEAD[0]->cur_pos.y;
+	int xdistance = ABS(x - APPLE->pos.x);
+	int ydistance = ABS(y - APPLE->pos.y);
 
-	if (KEYCONF[0]->move == KEY_LEFT || KEYCONF[0]->move == KEY_RIGHT)
+	if (KEYCONF[0]->move == KEY_DOWN || KEYCONF[0]->move == KEY_UP)
 	{
-		if (APPLE->pos.y < y)
-			*move = KEY_UP;
-		else if (APPLE->pos.y > y)
-			*move = KEY_DOWN;
+		if (xdistance >= ydistance)
+		{
+			if (APPLE->pos.x > x)
+				*move = KEY_RIGHT;
+			else if (APPLE->pos.x < x)
+				*move = KEY_LEFT;
+		}
 	}
-	else if (KEYCONF[0]->move == KEY_DOWN || KEYCONF[0]->move == KEY_UP)
+	else if (KEYCONF[0]->move == KEY_LEFT || KEYCONF[0]->move == KEY_RIGHT)
 	{
-		if (APPLE->pos.x < x)
-			*move = KEY_LEFT;
-		else if (APPLE->pos.x > x)
-			*move = KEY_RIGHT;
+		if (ydistance >= xdistance)
+		{
+			if (APPLE->pos.y < y)
+				*move = KEY_UP;
+			else if (APPLE->pos.y > y)
+				*move = KEY_DOWN;
+		}
 	}
-
 }
 
 static int		check_apple_back(t_mlx *mlx, int *move)
